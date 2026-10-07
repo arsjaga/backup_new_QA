@@ -1,0 +1,10 @@
+name: ACL group present, Update user access level in Expected GitLab projects and groups
+description: |
+    The GitLab group is obtained from the Expected GitLab database, The Git
+    group is obtained from the Input GitLab database. When the tool is
+    executed using the fake-gitlab package, the Output GitLab database shall
+    be generated and the Output GitLab database shall be synchronized with
+    the Expected GitLab database. If a user defined in the ACL is present in
+    the corresponding Expected GitLab project or group, but the user's current
+    access level differs from the configured access level in the ACL, the tool
+    shall update the user's access level to match the ACL definition.

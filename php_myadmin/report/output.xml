@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.2.2 (Python 3.12.7 on win32)" generated="2026-07-02T15:10:21.296393" rpa="false" schemaversion="5">
+<suite id="s1" name="Database Robot" source="C:\Users\user\Desktop\php_myadmin\database_robot.robot">
+<test id="s1-t1" name="Test to check 1.4.0 Version" line="52">
+<kw name="Connect Database and Setup QA Meta Data" type="SETUP">
+<kw name="Connect Database" owner="database.Database">
+<arg>product_db</arg>
+<status status="PASS" start="2026-07-02T15:10:22.072964" elapsed="2.154923"/>
+</kw>
+<kw name="Setup QA Meta Data">
+<kw name="Get Value From User" owner="Dialogs">
+<msg time="2026-07-02T15:10:29.776486" level="FAIL">No value provided by user.</msg>
+<var>${serial_number}</var>
+<arg>Update Product Serial Number</arg>
+<doc>Pauses execution and asks user to input a value.</doc>
+<status status="FAIL" start="2026-07-02T15:10:24.227887" elapsed="5.548599">No value provided by user.</status>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<arg>${PRODUCT_SERIAL_NUMBER}</arg>
+<arg>${serial_number}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="NOT RUN" start="2026-07-02T15:10:29.776486" elapsed="0.000000"/>
+</kw>
+<kw name="Insert the Values in Table" owner="database.Database">
+<arg>${PRODUCT_SERIAL_NUMBER}</arg>
+<status status="NOT RUN" start="2026-07-02T15:10:29.776486" elapsed="0.000000"/>
+</kw>
+<kw name="Get Value From User" owner="Dialogs">
+<var>${Hardware Version}</var>
+<arg>Update Hardware Version</arg>
+<doc>Pauses execution and asks user to input a value.</doc>
+<status status="NOT RUN" start="2026-07-02T15:10:29.776486" elapsed="0.000000"/>
+</kw>
+<kw name="Update Test Data" owner="database.Database">
+<arg>${PRODUCT_SERIAL_NUMBER}</arg>
+<arg>Hardware_Version</arg>
+<arg>${Hardware Version}</arg>
+<status status="NOT RUN" start="2026-07-02T15:10:29.776486" elapsed="0.000000"/>
+</kw>
+<kw name="Get Value From User" owner="Dialogs">
+<var>${QA Performed By}</var>
+<arg>Update QA Performed By</arg>
+<doc>Pauses execution and asks user to input a value.</doc>
+<status status="NOT RUN" start="2026-07-02T15:10:29.776486" elapsed="0.000000"/>
+</kw>
+<kw name="Update Test Data" owner="database.Database">
+<arg>${PRODUCT_SERIAL_NUMBER}</arg>
+<arg>QA_Performed_By</arg>
+<arg>${QA Performed By}</arg>
+<status status="NOT RUN" start="2026-07-02T15:10:29.776486" elapsed="0.000000"/>
+</kw>
+<kw name="Get Current Date" owner="DateTime">
+<var>${QA_Performed_On}</var>
+<arg>result_format=%d/%m/%Y</arg>
+<doc>Returns current local or UTC time with an optional increment.</doc>
+<status status="NOT RUN" start="2026-07-02T15:10:29.776486" elapsed="0.000000"/>
+</kw>
+<kw name="Update Test Data" owner="database.Database">
+<arg>${PRODUCT_SERIAL_NUMBER}</arg>
+<arg>QA_Performed_On</arg>
+<arg>${QA_Performed_On}</arg>
+<status status="NOT RUN" start="2026-07-02T15:10:29.776486" elapsed="0.000000"/>
+</kw>
+<status status="FAIL" start="2026-07-02T15:10:24.227887" elapsed="5.548599">No value provided by user.</status>
+</kw>
+<kw name="Get Device Port" owner="common">
+<status status="NOT RUN" start="2026-07-02T15:10:29.776486" elapsed="0.000000"/>
+</kw>
+<kw name="Open Serial Connection" owner="common">
+<arg>${DEVICE_PORT}</arg>
+<arg>115200</arg>
+<status status="NOT RUN" start="2026-07-02T15:10:29.776486" elapsed="0.000000"/>
+</kw>
+<status status="FAIL" start="2026-07-02T15:10:22.072964" elapsed="7.703522">No value provided by user.</status>
+</kw>
+<kw name="QA Suite Teardown" type="TEARDOWN">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-07-02T15:10:29.780322" level="INFO">${status} = FAIL</msg>
+<var>${status}</var>
+<arg>${TEST STATUS}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-07-02T15:10:29.780322" elapsed="0.000000"/>
+</kw>
+<kw name="Update Test Data" owner="database.Database">
+<msg time="2026-07-02T15:10:29.780322" level="FAIL">Variable '${PRODUCT_SERIAL_NUMBER}' not found.</msg>
+<arg>${PRODUCT_SERIAL_NUMBER}</arg>
+<arg>QA_Passed</arg>
+<arg>${status}</arg>
+<status status="FAIL" start="2026-07-02T15:10:29.780322" elapsed="0.000000">Variable '${PRODUCT_SERIAL_NUMBER}' not found.</status>
+</kw>
+<kw name="Close Database" owner="database.Database">
+<msg time="2026-07-02T15:10:29.780322" level="INFO">Database connection closed.</msg>
+<status status="PASS" start="2026-07-02T15:10:29.780322" elapsed="0.000000"/>
+</kw>
+<kw name="Close Serial Connection" owner="common">
+<kw name="Close Serial Port" owner="Serial">
+<doc>Closes the opened serial port connection.</doc>
+<status status="PASS" start="2026-07-02T15:10:29.780322" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2026-07-02T15:10:29.780322" elapsed="0.000000"/>
+</kw>
+<status status="FAIL" start="2026-07-02T15:10:29.780322" elapsed="0.000000">Variable '${PRODUCT_SERIAL_NUMBER}' not found.</status>
+</kw>
+<status status="FAIL" start="2026-07-02T15:10:22.072964" elapsed="7.707358">Setup failed:
+No value provided by user.
+
+Also teardown failed:
+Variable '${PRODUCT_SERIAL_NUMBER}' not found.</status>
+</test>
+<status status="FAIL" start="2026-07-02T15:10:21.298435" elapsed="8.481887"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Database Robot" id="s1" pass="0" fail="1" skip="0">Database Robot</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

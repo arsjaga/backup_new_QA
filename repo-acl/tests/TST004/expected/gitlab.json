@@ -1,0 +1,36 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "name": "arunkumar.m",
+            "state": "active"
+        },
+        {
+            "id": 2,
+            "name": "pooja.k",
+            "state": "active"
+        },
+        {
+            "id": 3,
+            "name": "nandhini.s",
+            "state": "active"
+        }
+    ],
+    "groups": [
+        {
+            "id": 12,
+            "path": "org/groups/world123",
+            "members": []
+        },
+        {
+            "id": 13,
+            "path": "org/groups/automotive-team",
+            "members": [
+                {
+                    "user_id": 1,
+                    "access_level": 30
+                }
+            ]
+        }
+    ]
+}

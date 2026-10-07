@@ -1,0 +1,9 @@
+name: Expected GitLab parent group not available
+description: |
+    The GitLab group is obtained from the Expected GitLab database, the Git
+    group is obtained from the Input GitLab database. When the tool is executed
+    using the fake-gitlab package, then the Output GitLab database shall be
+    generated and the Output GitLab database shall be synchronized with the
+    Expected GitLab database. If the parent group does not exist in Expected
+    Gitlab, the parent group should not be created, the tool should exit with
+    an error, after syncing the remaining groups.

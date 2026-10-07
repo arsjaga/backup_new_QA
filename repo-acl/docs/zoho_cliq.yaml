@@ -1,0 +1,27 @@
+Zoho Mail reference link:
+    Get org id - https://www.zoho.com/mail/help/api/get-org-details.html
+    Get group id - https://www.zoho.com/mail/help/api/get-all-group-details.html
+    fetch member list - https://www.zoho.com/mail/help/api/get-single-group-details.html
+    add group members - https://www.zoho.com/mail/help/api/group-add-member.html
+    delete group members - https://www.zoho.com/mail/help/api/delete-group-members.html
+
+Zoho cliq reference link:
+
+Step 1:
+    - Get org_id
+    - requests.get()
+    - data.get("data", {})
+    - org_data.get(zoid)
+
+step 2:
+    - Get group_id
+    - request_get
+    - data.get("data", {}).get("groups", [])
+    - group(name)
+    - get.group_id
+
+step 3:
+    - Get group_members
+    - request_get
+    - data.get("data", {}).get("mailGroupMemberList", []")
+

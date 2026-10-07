@@ -1,0 +1,8 @@
+name: Input group location is not available
+description: |
+    The GitLab group is obtained from the Expected GitLab database, The Git
+    group is obtained from the Input GitLab database, When the tool is
+    executed using the fake-gitlab package, The Output GitLab database shall
+    be generated and the Output GitLab database shall be synchronized with
+    the Expected GitLab database. If the Input group location is not available,
+    the tool should not update the Expected Gitlab.

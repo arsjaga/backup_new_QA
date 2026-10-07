@@ -1,0 +1,40 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "name": "arunkumar.m",
+            "state": "blocked"
+        },
+        {
+            "id": 2,
+            "name": "nandhini.s",
+            "state": "blocked"
+        },
+        {
+            "id": 3,
+            "name": "pooja.k",
+            "state": "active"
+        },
+        {
+            "id": 4,
+            "name": "jagadish.r",
+            "state": "blocked"
+        }
+    ],
+    "groups": [
+        {
+            "id": 12,
+            "path": "org/groups/world",
+            "members": [
+                {
+                    "user_id": 2,
+                    "access_level": 30
+                },
+                {
+                    "user_id": 3,
+                    "access_level": 30
+                }
+            ]
+        }
+    ]
+}

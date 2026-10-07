@@ -1,0 +1,10 @@
+name: Malformed group definition file in Expected Gitlab
+description: |
+    The GitLab group is obtained from the Expected GitLab database, The Git
+    group is obtained from the Input GitLab database, When the tool is
+    executed using the fake-gitlab package, The Output GitLab database shall
+    be generated and the Output GitLab database shall be synchronized with
+    the Expected GitLab database. If a user definition file in Input group
+    it is malformed, but not present in the Expected GitLab group, do not add
+    the user to the Expected GitLab group.Skip the user and continue processing
+    the remaining users.

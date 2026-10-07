@@ -1,0 +1,2001 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.5 (Python 3.13.5 on linux)" generated="2026-10-06T13:00:57.231702" rpa="false" schemaversion="5">
+<suite id="s1" name="Tests" source="/app/tests">
+<suite id="s1-s1" name="Test-Acl-Gitlab" source="/app/tests/test-acl-gitlab.robot">
+<test id="s1-s1-t1" name="Scenario: Groups in `acl_file` not shared with GitLab project" line="42">
+<kw name="Given Test directories are initialized">
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:00:57.325164" level="INFO">${INPUT_DIR} = /app/tests/ACL_TST001/input</msg>
+<arg>${INPUT_DIR}</arg>
+<arg>/app/tests/${test_dir}/input</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:00:57.322786" elapsed="0.002519"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:00:57.326126" level="INFO">${OUTPUT_DIR} = /app/tests/ACL_TST001/output</msg>
+<arg>${OUTPUT_DIR}</arg>
+<arg>/app/tests/${test_dir}/output</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:00:57.325617" elapsed="0.000573"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:00:57.327052" level="INFO">${EXP_DIR} = /app/tests/ACL_TST001/expected</msg>
+<arg>${EXP_DIR}</arg>
+<arg>/app/tests/${test_dir}/expected</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:00:57.326358" elapsed="0.000748"/>
+</kw>
+<arg>ACL_TST001</arg>
+<status status="PASS" start="2026-10-06T13:00:57.320780" elapsed="0.006421"/>
+</kw>
+<kw name="And The GitLab database file is prepared">
+<kw name="Create Directory" owner="OperatingSystem">
+<msg time="2026-10-06T13:00:57.334328" level="INFO" html="true">Created directory '&lt;a href="file:///app/tests/ACL_TST001/output"&gt;/app/tests/ACL_TST001/output&lt;/a&gt;'.</msg>
+<arg>${OUTPUT_DIR}</arg>
+<doc>Creates the specified directory.</doc>
+<status status="PASS" start="2026-10-06T13:00:57.327921" elapsed="0.006580"/>
+</kw>
+<kw name="Copy File" owner="OperatingSystem">
+<msg time="2026-10-06T13:00:57.394183" level="INFO" html="true">Copied file from '&lt;a href="file:///app/tests/ACL_TST001/input/gitlab.json"&gt;/app/tests/ACL_TST001/input/gitlab.json&lt;/a&gt;' to '&lt;a href="file:///app/tests/ACL_TST001/output/gitlab.json"&gt;/app/tests/ACL_TST001/output/gitlab.json&lt;/a&gt;'.</msg>
+<arg>${INPUT_DIR}/gitlab.json</arg>
+<arg>${OUTPUT_DIR}/gitlab.json</arg>
+<doc>Copies the source file into the destination.</doc>
+<status status="PASS" start="2026-10-06T13:00:57.334704" elapsed="0.059642"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:00:57.327532" elapsed="0.066934"/>
+</kw>
+<kw name="When ACL Git group sync is executed">
+<kw name="Execute ACL GitLab Group Synchronization">
+<kw name="Run Process" owner="Process">
+<msg time="2026-10-06T13:00:57.397049" level="INFO">Starting process:
+coverage run --parallel-mode -m repo_acl.main acl --csv-file /app/tests/ACL_TST001/input/acl.csv --gitlab-url U --access-token X</msg>
+<msg time="2026-10-06T13:00:57.398101" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-10-06T13:00:57.962073" level="INFO">Process completed.</msg>
+<arg>coverage</arg>
+<arg>run</arg>
+<arg>--parallel-mode</arg>
+<arg>-m</arg>
+<arg>repo_acl.main</arg>
+<arg>acl</arg>
+<arg>--csv-file</arg>
+<arg>${INPUT_DIR}/acl.csv</arg>
+<arg>--gitlab-url</arg>
+<arg>U</arg>
+<arg>--access-token</arg>
+<arg>X</arg>
+<arg>@{dry_run}</arg>
+<arg>env:FAKE_GITLAB_DB_PATH=${OUTPUT_DIR}/gitlab.json</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-10-06T13:00:57.396002" elapsed="0.566336"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:00:57.395515" elapsed="0.567033"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:00:57.394868" elapsed="0.567747"/>
+</kw>
+<kw name="Then The GitLab output should match the expected result">
+<kw name="Check Files Equal">
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-10-06T13:00:57.965203" level="INFO" html="true">Getting file '&lt;a href="file:///app/tests/ACL_TST001/output/gitlab.json"&gt;/app/tests/ACL_TST001/output/gitlab.json&lt;/a&gt;'.</msg>
+<msg time="2026-10-06T13:00:57.969610" level="INFO">${c1} = {
+    "users": [
+        {
+            "id": 1,
+            "name": "arunkumar.m",
+            "username": "arunkumar.m",
+            "state": "active"
+        },
+        {
+            "id": 2,
+      ...</msg>
+<var>${c1}</var>
+<arg>${file1}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-10-06T13:00:57.964861" elapsed="0.004820"/>
+</kw>
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-10-06T13:00:57.970324" level="INFO" html="true">Getting file '&lt;a href="file:///app/tests/ACL_TST001/expected/gitlab.json"&gt;/app/tests/ACL_TST001/expected/gitlab.json&lt;/a&gt;'.</msg>
+<msg time="2026-10-06T13:00:57.980870" level="INFO">${c2} = {
+    "users": [
+        {
+            "id": 1,
+            "name": "arunkumar.m",
+            "username": "arunkumar.m",
+            "state": "active"
+        },
+        {
+            "id": 2,
+      ...</msg>
+<var>${c2}</var>
+<arg>${file2}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-10-06T13:00:57.970028" elapsed="0.010914"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${c1}</arg>
+<arg>${c2}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-10-06T13:00:57.981296" elapsed="0.000766"/>
+</kw>
+<arg>${OUTPUT_DIR}/gitlab.json</arg>
+<arg>${EXP_DIR}/gitlab.json</arg>
+<status status="PASS" start="2026-10-06T13:00:57.964001" elapsed="0.018174"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:00:57.963177" elapsed="0.019088"/>
+</kw>
+<doc>ACL_REQ001</doc>
+<status status="PASS" start="2026-10-06T13:00:57.318747" elapsed="0.663823"/>
+</test>
+<test id="s1-s1-t2" name="Scenario: Groups specified in the `acl_file` with an access level of no-access" line="49">
+<kw name="Given Test directories are initialized">
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:00:57.987623" level="INFO">${INPUT_DIR} = /app/tests/ACL_TST002/input</msg>
+<arg>${INPUT_DIR}</arg>
+<arg>/app/tests/${test_dir}/input</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:00:57.986475" elapsed="0.001224"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:00:57.988311" level="INFO">${OUTPUT_DIR} = /app/tests/ACL_TST002/output</msg>
+<arg>${OUTPUT_DIR}</arg>
+<arg>/app/tests/${test_dir}/output</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:00:57.987879" elapsed="0.000492"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:00:57.989164" level="INFO">${EXP_DIR} = /app/tests/ACL_TST002/expected</msg>
+<arg>${EXP_DIR}</arg>
+<arg>/app/tests/${test_dir}/expected</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:00:57.988523" elapsed="0.000696"/>
+</kw>
+<arg>ACL_TST002</arg>
+<status status="PASS" start="2026-10-06T13:00:57.984892" elapsed="0.004404"/>
+</kw>
+<kw name="And The GitLab database file is prepared">
+<kw name="Create Directory" owner="OperatingSystem">
+<msg time="2026-10-06T13:00:57.995250" level="INFO" html="true">Created directory '&lt;a href="file:///app/tests/ACL_TST002/output"&gt;/app/tests/ACL_TST002/output&lt;/a&gt;'.</msg>
+<arg>${OUTPUT_DIR}</arg>
+<doc>Creates the specified directory.</doc>
+<status status="PASS" start="2026-10-06T13:00:57.989979" elapsed="0.005417"/>
+</kw>
+<kw name="Copy File" owner="OperatingSystem">
+<msg time="2026-10-06T13:00:58.048773" level="INFO" html="true">Copied file from '&lt;a href="file:///app/tests/ACL_TST002/input/gitlab.json"&gt;/app/tests/ACL_TST002/input/gitlab.json&lt;/a&gt;' to '&lt;a href="file:///app/tests/ACL_TST002/output/gitlab.json"&gt;/app/tests/ACL_TST002/output/gitlab.json&lt;/a&gt;'.</msg>
+<arg>${INPUT_DIR}/gitlab.json</arg>
+<arg>${OUTPUT_DIR}/gitlab.json</arg>
+<doc>Copies the source file into the destination.</doc>
+<status status="PASS" start="2026-10-06T13:00:57.995594" elapsed="0.053923"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:00:57.989581" elapsed="0.060090"/>
+</kw>
+<kw name="When ACL Git group sync is executed">
+<kw name="Execute ACL GitLab Group Synchronization">
+<kw name="Run Process" owner="Process">
+<msg time="2026-10-06T13:00:58.052851" level="INFO">Starting process:
+coverage run --parallel-mode -m repo_acl.main acl --csv-file /app/tests/ACL_TST002/input/acl.csv --gitlab-url U --access-token X</msg>
+<msg time="2026-10-06T13:00:58.053560" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-10-06T13:00:58.516692" level="INFO">Process completed.</msg>
+<arg>coverage</arg>
+<arg>run</arg>
+<arg>--parallel-mode</arg>
+<arg>-m</arg>
+<arg>repo_acl.main</arg>
+<arg>acl</arg>
+<arg>--csv-file</arg>
+<arg>${INPUT_DIR}/acl.csv</arg>
+<arg>--gitlab-url</arg>
+<arg>U</arg>
+<arg>--access-token</arg>
+<arg>X</arg>
+<arg>@{dry_run}</arg>
+<arg>env:FAKE_GITLAB_DB_PATH=${OUTPUT_DIR}/gitlab.json</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-10-06T13:00:58.051738" elapsed="0.465255"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:00:58.050831" elapsed="0.466463"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:00:58.050228" elapsed="0.467170"/>
+</kw>
+<kw name="Then The GitLab output should match the expected result">
+<kw name="Check Files Equal">
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-10-06T13:00:58.520308" level="INFO" html="true">Getting file '&lt;a href="file:///app/tests/ACL_TST002/output/gitlab.json"&gt;/app/tests/ACL_TST002/output/gitlab.json&lt;/a&gt;'.</msg>
+<msg time="2026-10-06T13:00:58.525209" level="INFO">${c1} = {
+    "users": [
+        {
+            "id": 1,
+            "name": "arunkumar.m",
+            "state": "active"
+        },
+        {
+            "id": 2,
+            "name": "pooja.k",
+            "s...</msg>
+<var>${c1}</var>
+<arg>${file1}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-10-06T13:00:58.519769" elapsed="0.005520"/>
+</kw>
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-10-06T13:00:58.525830" level="INFO" html="true">Getting file '&lt;a href="file:///app/tests/ACL_TST002/expected/gitlab.json"&gt;/app/tests/ACL_TST002/expected/gitlab.json&lt;/a&gt;'.</msg>
+<msg time="2026-10-06T13:00:58.537026" level="INFO">${c2} = {
+    "users": [
+        {
+            "id": 1,
+            "name": "arunkumar.m",
+            "state": "active"
+        },
+        {
+            "id": 2,
+            "name": "pooja.k",
+            "s...</msg>
+<var>${c2}</var>
+<arg>${file2}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-10-06T13:00:58.525521" elapsed="0.011573"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${c1}</arg>
+<arg>${c2}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-10-06T13:00:58.537318" elapsed="0.000591"/>
+</kw>
+<arg>${OUTPUT_DIR}/gitlab.json</arg>
+<arg>${EXP_DIR}/gitlab.json</arg>
+<status status="PASS" start="2026-10-06T13:00:58.518920" elapsed="0.019091"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:00:58.518053" elapsed="0.020022"/>
+</kw>
+<doc>ACL_REQ002</doc>
+<status status="PASS" start="2026-10-06T13:00:57.983208" elapsed="0.555090"/>
+</test>
+<test id="s1-s1-t3" name="Scenario: Invalid data in `acl_file`" line="56">
+<kw name="Given Test directories are initialized">
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:00:58.541481" level="INFO">${INPUT_DIR} = /app/tests/ACL_TST003/input</msg>
+<arg>${INPUT_DIR}</arg>
+<arg>/app/tests/${test_dir}/input</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:00:58.540390" elapsed="0.001174"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:00:58.542334" level="INFO">${OUTPUT_DIR} = /app/tests/ACL_TST003/output</msg>
+<arg>${OUTPUT_DIR}</arg>
+<arg>/app/tests/${test_dir}/output</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:00:58.541802" elapsed="0.000596"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:00:58.543189" level="INFO">${EXP_DIR} = /app/tests/ACL_TST003/expected</msg>
+<arg>${EXP_DIR}</arg>
+<arg>/app/tests/${test_dir}/expected</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:00:58.542551" elapsed="0.000691"/>
+</kw>
+<arg>ACL_TST003</arg>
+<status status="PASS" start="2026-10-06T13:00:58.539702" elapsed="0.003618"/>
+</kw>
+<kw name="And The GitLab database file is prepared">
+<kw name="Create Directory" owner="OperatingSystem">
+<msg time="2026-10-06T13:00:58.549994" level="INFO" html="true">Created directory '&lt;a href="file:///app/tests/ACL_TST003/output"&gt;/app/tests/ACL_TST003/output&lt;/a&gt;'.</msg>
+<arg>${OUTPUT_DIR}</arg>
+<doc>Creates the specified directory.</doc>
+<status status="PASS" start="2026-10-06T13:00:58.544033" elapsed="0.006140"/>
+</kw>
+<kw name="Copy File" owner="OperatingSystem">
+<msg time="2026-10-06T13:00:58.600876" level="INFO" html="true">Copied file from '&lt;a href="file:///app/tests/ACL_TST003/input/gitlab.json"&gt;/app/tests/ACL_TST003/input/gitlab.json&lt;/a&gt;' to '&lt;a href="file:///app/tests/ACL_TST003/output/gitlab.json"&gt;/app/tests/ACL_TST003/output/gitlab.json&lt;/a&gt;'.</msg>
+<arg>${INPUT_DIR}/gitlab.json</arg>
+<arg>${OUTPUT_DIR}/gitlab.json</arg>
+<doc>Copies the source file into the destination.</doc>
+<status status="PASS" start="2026-10-06T13:00:58.550397" elapsed="0.050656"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:00:58.543641" elapsed="0.057531"/>
+</kw>
+<kw name="When ACL Git group sync is executed">
+<kw name="Execute ACL GitLab Group Synchronization">
+<kw name="Run Process" owner="Process">
+<msg time="2026-10-06T13:00:58.604414" level="INFO">Starting process:
+coverage run --parallel-mode -m repo_acl.main acl --csv-file /app/tests/ACL_TST003/input/acl.csv --gitlab-url U --access-token X</msg>
+<msg time="2026-10-06T13:00:58.605326" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-10-06T13:00:59.093544" level="INFO">Process completed.</msg>
+<arg>coverage</arg>
+<arg>run</arg>
+<arg>--parallel-mode</arg>
+<arg>-m</arg>
+<arg>repo_acl.main</arg>
+<arg>acl</arg>
+<arg>--csv-file</arg>
+<arg>${INPUT_DIR}/acl.csv</arg>
+<arg>--gitlab-url</arg>
+<arg>U</arg>
+<arg>--access-token</arg>
+<arg>X</arg>
+<arg>@{dry_run}</arg>
+<arg>env:FAKE_GITLAB_DB_PATH=${OUTPUT_DIR}/gitlab.json</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-10-06T13:00:58.603184" elapsed="0.490565"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:00:58.602325" elapsed="0.491608"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:00:58.601524" elapsed="0.492461"/>
+</kw>
+<kw name="Then The GitLab output should match the expected result">
+<kw name="Check Files Equal">
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-10-06T13:00:59.096014" level="INFO" html="true">Getting file '&lt;a href="file:///app/tests/ACL_TST003/output/gitlab.json"&gt;/app/tests/ACL_TST003/output/gitlab.json&lt;/a&gt;'.</msg>
+<msg time="2026-10-06T13:00:59.100199" level="INFO">${c1} = {
+    "users": [
+        {
+            "id": 1,
+            "name": "arunkumar.m",
+            "state": "active"
+        },
+        {
+            "id": 2,
+            "name": "pooja.k",
+            "s...</msg>
+<var>${c1}</var>
+<arg>${file1}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-10-06T13:00:59.095696" elapsed="0.004565"/>
+</kw>
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-10-06T13:00:59.100681" level="INFO" html="true">Getting file '&lt;a href="file:///app/tests/ACL_TST003/expected/gitlab.json"&gt;/app/tests/ACL_TST003/expected/gitlab.json&lt;/a&gt;'.</msg>
+<msg time="2026-10-06T13:00:59.113287" level="INFO">${c2} = {
+    "users": [
+        {
+            "id": 1,
+            "name": "arunkumar.m",
+            "state": "active"
+        },
+        {
+            "id": 2,
+            "name": "pooja.k",
+            "s...</msg>
+<var>${c2}</var>
+<arg>${file2}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-10-06T13:00:59.100468" elapsed="0.013188"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${c1}</arg>
+<arg>${c2}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-10-06T13:00:59.113964" elapsed="0.000497"/>
+</kw>
+<arg>${OUTPUT_DIR}/gitlab.json</arg>
+<arg>${EXP_DIR}/gitlab.json</arg>
+<status status="PASS" start="2026-10-06T13:00:59.094966" elapsed="0.019587"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:00:59.094353" elapsed="0.020265"/>
+</kw>
+<doc>ACL_REQ003</doc>
+<status status="PASS" start="2026-10-06T13:00:58.538793" elapsed="0.576042"/>
+</test>
+<test id="s1-s1-t4" name="Scenario: The `acl_file` not available" line="63">
+<kw name="Given Test directories are initialized">
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:00:59.117882" level="INFO">${INPUT_DIR} = /app/tests/ACL_TST004/input</msg>
+<arg>${INPUT_DIR}</arg>
+<arg>/app/tests/${test_dir}/input</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:00:59.116717" elapsed="0.001246"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:00:59.118529" level="INFO">${OUTPUT_DIR} = /app/tests/ACL_TST004/output</msg>
+<arg>${OUTPUT_DIR}</arg>
+<arg>/app/tests/${test_dir}/output</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:00:59.118128" elapsed="0.000453"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:00:59.119356" level="INFO">${EXP_DIR} = /app/tests/ACL_TST004/expected</msg>
+<arg>${EXP_DIR}</arg>
+<arg>/app/tests/${test_dir}/expected</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:00:59.118717" elapsed="0.000693"/>
+</kw>
+<arg>ACL_TST004</arg>
+<status status="PASS" start="2026-10-06T13:00:59.116087" elapsed="0.003400"/>
+</kw>
+<kw name="And The GitLab database file is prepared">
+<kw name="Create Directory" owner="OperatingSystem">
+<msg time="2026-10-06T13:00:59.127407" level="INFO" html="true">Created directory '&lt;a href="file:///app/tests/ACL_TST004/output"&gt;/app/tests/ACL_TST004/output&lt;/a&gt;'.</msg>
+<arg>${OUTPUT_DIR}</arg>
+<doc>Creates the specified directory.</doc>
+<status status="PASS" start="2026-10-06T13:00:59.120268" elapsed="0.007318"/>
+</kw>
+<kw name="Copy File" owner="OperatingSystem">
+<msg time="2026-10-06T13:00:59.171664" level="INFO" html="true">Copied file from '&lt;a href="file:///app/tests/ACL_TST004/input/gitlab.json"&gt;/app/tests/ACL_TST004/input/gitlab.json&lt;/a&gt;' to '&lt;a href="file:///app/tests/ACL_TST004/output/gitlab.json"&gt;/app/tests/ACL_TST004/output/gitlab.json&lt;/a&gt;'.</msg>
+<arg>${INPUT_DIR}/gitlab.json</arg>
+<arg>${OUTPUT_DIR}/gitlab.json</arg>
+<doc>Copies the source file into the destination.</doc>
+<status status="PASS" start="2026-10-06T13:00:59.127804" elapsed="0.044025"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:00:59.119800" elapsed="0.052170"/>
+</kw>
+<kw name="When ACL Git group sync is executed">
+<kw name="Execute ACL GitLab Group Synchronization">
+<kw name="Run Process" owner="Process">
+<msg time="2026-10-06T13:00:59.174950" level="INFO">Starting process:
+coverage run --parallel-mode -m repo_acl.main acl --csv-file /app/tests/ACL_TST004/input/acl.csv --gitlab-url U --access-token X</msg>
+<msg time="2026-10-06T13:00:59.175716" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-10-06T13:00:59.717046" level="INFO">Process completed.</msg>
+<arg>coverage</arg>
+<arg>run</arg>
+<arg>--parallel-mode</arg>
+<arg>-m</arg>
+<arg>repo_acl.main</arg>
+<arg>acl</arg>
+<arg>--csv-file</arg>
+<arg>${INPUT_DIR}/acl.csv</arg>
+<arg>--gitlab-url</arg>
+<arg>U</arg>
+<arg>--access-token</arg>
+<arg>X</arg>
+<arg>@{dry_run}</arg>
+<arg>env:FAKE_GITLAB_DB_PATH=${OUTPUT_DIR}/gitlab.json</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-10-06T13:00:59.173472" elapsed="0.543720"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:00:59.172919" elapsed="0.544419"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:00:59.172309" elapsed="0.545090"/>
+</kw>
+<kw name="Then The GitLab output should match the expected result">
+<kw name="Check Files Equal">
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-10-06T13:00:59.719094" level="INFO" html="true">Getting file '&lt;a href="file:///app/tests/ACL_TST004/output/gitlab.json"&gt;/app/tests/ACL_TST004/output/gitlab.json&lt;/a&gt;'.</msg>
+<msg time="2026-10-06T13:00:59.723627" level="INFO">${c1} = {
+    "users": [
+        {
+            "id": 1,
+            "name": "arunkumar.m",
+            "state": "active"
+        },
+        {
+            "id": 2,
+            "name": "pooja.k",
+            "s...</msg>
+<var>${c1}</var>
+<arg>${file1}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-10-06T13:00:59.718889" elapsed="0.004802"/>
+</kw>
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-10-06T13:00:59.724186" level="INFO" html="true">Getting file '&lt;a href="file:///app/tests/ACL_TST004/expected/gitlab.json"&gt;/app/tests/ACL_TST004/expected/gitlab.json&lt;/a&gt;'.</msg>
+<msg time="2026-10-06T13:00:59.728424" level="INFO">${c2} = {
+    "users": [
+        {
+            "id": 1,
+            "name": "arunkumar.m",
+            "state": "active"
+        },
+        {
+            "id": 2,
+            "name": "pooja.k",
+            "s...</msg>
+<var>${c2}</var>
+<arg>${file2}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-10-06T13:00:59.723938" elapsed="0.004550"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${c1}</arg>
+<arg>${c2}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-10-06T13:00:59.728707" elapsed="0.000542"/>
+</kw>
+<arg>${OUTPUT_DIR}/gitlab.json</arg>
+<arg>${EXP_DIR}/gitlab.json</arg>
+<status status="PASS" start="2026-10-06T13:00:59.718337" elapsed="0.011012"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:00:59.717798" elapsed="0.011617"/>
+</kw>
+<doc>ACL_REQ004</doc>
+<status status="PASS" start="2026-10-06T13:00:59.115308" elapsed="0.614333"/>
+</test>
+<test id="s1-s1-t5" name="Scenario: Groups already in `shared_with_groups`" line="70">
+<kw name="Given Test directories are initialized">
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:00:59.732481" level="INFO">${INPUT_DIR} = /app/tests/ACL_TST005/input</msg>
+<arg>${INPUT_DIR}</arg>
+<arg>/app/tests/${test_dir}/input</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:00:59.731644" elapsed="0.000903"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:00:59.733077" level="INFO">${OUTPUT_DIR} = /app/tests/ACL_TST005/output</msg>
+<arg>${OUTPUT_DIR}</arg>
+<arg>/app/tests/${test_dir}/output</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:00:59.732708" elapsed="0.000420"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:00:59.733978" level="INFO">${EXP_DIR} = /app/tests/ACL_TST005/expected</msg>
+<arg>${EXP_DIR}</arg>
+<arg>/app/tests/${test_dir}/expected</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:00:59.733264" elapsed="0.000775"/>
+</kw>
+<arg>ACL_TST005</arg>
+<status status="PASS" start="2026-10-06T13:00:59.731058" elapsed="0.003060"/>
+</kw>
+<kw name="And The GitLab database file is prepared">
+<kw name="Create Directory" owner="OperatingSystem">
+<msg time="2026-10-06T13:00:59.740079" level="INFO" html="true">Created directory '&lt;a href="file:///app/tests/ACL_TST005/output"&gt;/app/tests/ACL_TST005/output&lt;/a&gt;'.</msg>
+<arg>${OUTPUT_DIR}</arg>
+<doc>Creates the specified directory.</doc>
+<status status="PASS" start="2026-10-06T13:00:59.734785" elapsed="0.005649"/>
+</kw>
+<kw name="Copy File" owner="OperatingSystem">
+<msg time="2026-10-06T13:00:59.786435" level="INFO" html="true">Copied file from '&lt;a href="file:///app/tests/ACL_TST005/input/gitlab.json"&gt;/app/tests/ACL_TST005/input/gitlab.json&lt;/a&gt;' to '&lt;a href="file:///app/tests/ACL_TST005/output/gitlab.json"&gt;/app/tests/ACL_TST005/output/gitlab.json&lt;/a&gt;'.</msg>
+<arg>${INPUT_DIR}/gitlab.json</arg>
+<arg>${OUTPUT_DIR}/gitlab.json</arg>
+<doc>Copies the source file into the destination.</doc>
+<status status="PASS" start="2026-10-06T13:00:59.740640" elapsed="0.045964"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:00:59.734390" elapsed="0.052335"/>
+</kw>
+<kw name="When ACL Git group sync is executed">
+<kw name="Execute ACL GitLab Group Synchronization">
+<kw name="Run Process" owner="Process">
+<msg time="2026-10-06T13:00:59.789592" level="INFO">Starting process:
+coverage run --parallel-mode -m repo_acl.main acl --csv-file /app/tests/ACL_TST005/input/acl.csv --gitlab-url U --access-token X</msg>
+<msg time="2026-10-06T13:00:59.790777" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-10-06T13:01:00.292104" level="INFO">Process completed.</msg>
+<arg>coverage</arg>
+<arg>run</arg>
+<arg>--parallel-mode</arg>
+<arg>-m</arg>
+<arg>repo_acl.main</arg>
+<arg>acl</arg>
+<arg>--csv-file</arg>
+<arg>${INPUT_DIR}/acl.csv</arg>
+<arg>--gitlab-url</arg>
+<arg>U</arg>
+<arg>--access-token</arg>
+<arg>X</arg>
+<arg>@{dry_run}</arg>
+<arg>env:FAKE_GITLAB_DB_PATH=${OUTPUT_DIR}/gitlab.json</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-10-06T13:00:59.787986" elapsed="0.504261"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:00:59.787537" elapsed="0.504864"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:00:59.787089" elapsed="0.505366"/>
+</kw>
+<kw name="Then The GitLab output should match the expected result">
+<kw name="Check Files Equal">
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:00.294382" level="INFO" html="true">Getting file '&lt;a href="file:///app/tests/ACL_TST005/output/gitlab.json"&gt;/app/tests/ACL_TST005/output/gitlab.json&lt;/a&gt;'.</msg>
+<msg time="2026-10-06T13:01:00.299063" level="INFO">${c1} = {
+    "users": [
+        {
+            "id": 1,
+            "name": "arunkumar.m",
+            "state": "active"
+        },
+        {
+            "id": 2,
+            "name": "pooja.k",
+            "s...</msg>
+<var>${c1}</var>
+<arg>${file1}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-10-06T13:01:00.294139" elapsed="0.004991"/>
+</kw>
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:00.299590" level="INFO" html="true">Getting file '&lt;a href="file:///app/tests/ACL_TST005/expected/gitlab.json"&gt;/app/tests/ACL_TST005/expected/gitlab.json&lt;/a&gt;'.</msg>
+<msg time="2026-10-06T13:01:00.312079" level="INFO">${c2} = {
+    "users": [
+        {
+            "id": 1,
+            "name": "arunkumar.m",
+            "state": "active"
+        },
+        {
+            "id": 2,
+            "name": "pooja.k",
+            "s...</msg>
+<var>${c2}</var>
+<arg>${file2}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-10-06T13:01:00.299376" elapsed="0.012778"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${c1}</arg>
+<arg>${c2}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-10-06T13:01:00.312476" elapsed="0.000662"/>
+</kw>
+<arg>${OUTPUT_DIR}/gitlab.json</arg>
+<arg>${EXP_DIR}/gitlab.json</arg>
+<status status="PASS" start="2026-10-06T13:01:00.293311" elapsed="0.019967"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:01:00.292798" elapsed="0.020551"/>
+</kw>
+<doc>ACL_REQ005</doc>
+<status status="PASS" start="2026-10-06T13:00:59.730141" elapsed="0.583712"/>
+</test>
+<test id="s1-s1-t6" name="Scenario: Dry run execution in acl" line="77">
+<kw name="Given Test directories are initialized">
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:01:00.316758" level="INFO">${INPUT_DIR} = /app/tests/ACL_TST006/input</msg>
+<arg>${INPUT_DIR}</arg>
+<arg>/app/tests/${test_dir}/input</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:01:00.316071" elapsed="0.000753"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:01:00.317367" level="INFO">${OUTPUT_DIR} = /app/tests/ACL_TST006/output</msg>
+<arg>${OUTPUT_DIR}</arg>
+<arg>/app/tests/${test_dir}/output</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:01:00.316974" elapsed="0.000452"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:01:00.318219" level="INFO">${EXP_DIR} = /app/tests/ACL_TST006/expected</msg>
+<arg>${EXP_DIR}</arg>
+<arg>/app/tests/${test_dir}/expected</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:01:00.317573" elapsed="0.000701"/>
+</kw>
+<arg>ACL_TST006</arg>
+<status status="PASS" start="2026-10-06T13:01:00.315523" elapsed="0.002827"/>
+</kw>
+<kw name="And The GitLab database file is prepared">
+<kw name="Create Directory" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:00.323390" level="INFO" html="true">Created directory '&lt;a href="file:///app/tests/ACL_TST006/output"&gt;/app/tests/ACL_TST006/output&lt;/a&gt;'.</msg>
+<arg>${OUTPUT_DIR}</arg>
+<doc>Creates the specified directory.</doc>
+<status status="PASS" start="2026-10-06T13:01:00.318944" elapsed="0.004587"/>
+</kw>
+<kw name="Copy File" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:00.373623" level="INFO" html="true">Copied file from '&lt;a href="file:///app/tests/ACL_TST006/input/gitlab.json"&gt;/app/tests/ACL_TST006/input/gitlab.json&lt;/a&gt;' to '&lt;a href="file:///app/tests/ACL_TST006/output/gitlab.json"&gt;/app/tests/ACL_TST006/output/gitlab.json&lt;/a&gt;'.</msg>
+<arg>${INPUT_DIR}/gitlab.json</arg>
+<arg>${OUTPUT_DIR}/gitlab.json</arg>
+<doc>Copies the source file into the destination.</doc>
+<status status="PASS" start="2026-10-06T13:01:00.323721" elapsed="0.050114"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:01:00.318607" elapsed="0.055349"/>
+</kw>
+<kw name="When ACL GitL group sync is executed with dry-run">
+<kw name="Execute ACL GitLab Group Synchronization">
+<kw name="Run Process" owner="Process">
+<msg time="2026-10-06T13:01:00.376347" level="INFO">Starting process:
+coverage run --parallel-mode -m repo_acl.main acl --csv-file /app/tests/ACL_TST006/input/acl.csv --gitlab-url U --access-token X --dry-run</msg>
+<msg time="2026-10-06T13:01:00.377300" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-10-06T13:01:00.849180" level="INFO">Process completed.</msg>
+<arg>coverage</arg>
+<arg>run</arg>
+<arg>--parallel-mode</arg>
+<arg>-m</arg>
+<arg>repo_acl.main</arg>
+<arg>acl</arg>
+<arg>--csv-file</arg>
+<arg>${INPUT_DIR}/acl.csv</arg>
+<arg>--gitlab-url</arg>
+<arg>U</arg>
+<arg>--access-token</arg>
+<arg>X</arg>
+<arg>@{dry_run}</arg>
+<arg>env:FAKE_GITLAB_DB_PATH=${OUTPUT_DIR}/gitlab.json</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-10-06T13:01:00.375204" elapsed="0.474173"/>
+</kw>
+<arg>--dry-run</arg>
+<status status="PASS" start="2026-10-06T13:01:00.374770" elapsed="0.474841"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:01:00.374310" elapsed="0.475379"/>
+</kw>
+<kw name="Then The GitLab output should match the expected result">
+<kw name="Check Files Equal">
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:00.851792" level="INFO" html="true">Getting file '&lt;a href="file:///app/tests/ACL_TST006/output/gitlab.json"&gt;/app/tests/ACL_TST006/output/gitlab.json&lt;/a&gt;'.</msg>
+<msg time="2026-10-06T13:01:00.856138" level="INFO">${c1} = {
+    "users": [
+        {
+            "id": 1,
+            "name": "arunkumar.m",
+            "state": "active"
+        },
+        {
+            "id": 2,
+            "name": "pooja.k",
+            "s...</msg>
+<var>${c1}</var>
+<arg>${file1}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-10-06T13:01:00.851461" elapsed="0.005003"/>
+</kw>
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:00.856982" level="INFO" html="true">Getting file '&lt;a href="file:///app/tests/ACL_TST006/expected/gitlab.json"&gt;/app/tests/ACL_TST006/expected/gitlab.json&lt;/a&gt;'.</msg>
+<msg time="2026-10-06T13:01:00.860872" level="INFO">${c2} = {
+    "users": [
+        {
+            "id": 1,
+            "name": "arunkumar.m",
+            "state": "active"
+        },
+        {
+            "id": 2,
+            "name": "pooja.k",
+            "s...</msg>
+<var>${c2}</var>
+<arg>${file2}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-10-06T13:01:00.856739" elapsed="0.004231"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${c1}</arg>
+<arg>${c2}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-10-06T13:01:00.861324" elapsed="0.000581"/>
+</kw>
+<arg>${OUTPUT_DIR}/gitlab.json</arg>
+<arg>${EXP_DIR}/gitlab.json</arg>
+<status status="PASS" start="2026-10-06T13:01:00.850865" elapsed="0.011144"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:01:00.850196" elapsed="0.011876"/>
+</kw>
+<doc>ACL_REQ006</doc>
+<status status="PASS" start="2026-10-06T13:01:00.314406" elapsed="0.547898"/>
+</test>
+<status status="PASS" start="2026-10-06T13:00:57.280859" elapsed="3.582299"/>
+</suite>
+<suite id="s1-s2" name="Test-Gitlab" source="/app/tests/test-gitlab.robot">
+<test id="s1-s2-t1" name="Scenario: User synchronization between Git and Gitlab groups" line="55">
+<kw name="Given Test directories are initialized">
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:01:00.871527" level="INFO">${INPUT_DIR} = /app/tests/TST001/input</msg>
+<arg>${INPUT_DIR}</arg>
+<arg>/app/tests/${test_dir}/input</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:01:00.870857" elapsed="0.000735"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:01:00.872106" level="INFO">${OUTPUT_DIR} = /app/tests/TST001/output</msg>
+<arg>${OUTPUT_DIR}</arg>
+<arg>/app/tests/${test_dir}/output</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:01:00.871744" elapsed="0.000414"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:01:00.872933" level="INFO">${EXP_DIR} = /app/tests/TST001/expected</msg>
+<arg>${EXP_DIR}</arg>
+<arg>/app/tests/${test_dir}/expected</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:01:00.872291" elapsed="0.000700"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:01:00.873726" level="INFO">${PEOPLEDB_DIR} = /app/tests/peopledb</msg>
+<arg>${PEOPLEDB_DIR}</arg>
+<arg>/app/tests/peopledb</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:01:00.873127" elapsed="0.000660"/>
+</kw>
+<arg>TST001</arg>
+<status status="PASS" start="2026-10-06T13:01:00.870398" elapsed="0.003465"/>
+</kw>
+<kw name="And The GitLab database file is prepared">
+<kw name="Create Directory" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:00.878838" level="INFO" html="true">Created directory '&lt;a href="file:///app/tests/TST001/output"&gt;/app/tests/TST001/output&lt;/a&gt;'.</msg>
+<arg>${OUTPUT_DIR}</arg>
+<doc>Creates the specified directory.</doc>
+<status status="PASS" start="2026-10-06T13:01:00.874494" elapsed="0.004488"/>
+</kw>
+<kw name="Copy Directory" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:00.919999" level="INFO" html="true">Copied directory from '&lt;a href="file:///app/tests/peopledb/peopledb"&gt;/app/tests/peopledb/peopledb&lt;/a&gt;' to '&lt;a href="file:///app/tests/TST001/input/peopledb"&gt;/app/tests/TST001/input/peopledb&lt;/a&gt;'.</msg>
+<arg>${PEOPLEDB_DIR}/peopledb</arg>
+<arg>${INPUT_DIR}</arg>
+<doc>Copies the source directory into the destination.</doc>
+<status status="PASS" start="2026-10-06T13:01:00.879163" elapsed="0.040998"/>
+</kw>
+<kw name="Copy File" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:00.969884" level="INFO" html="true">Copied file from '&lt;a href="file:///app/tests/TST001/input/gitlab.json"&gt;/app/tests/TST001/input/gitlab.json&lt;/a&gt;' to '&lt;a href="file:///app/tests/TST001/output/gitlab.json"&gt;/app/tests/TST001/output/gitlab.json&lt;/a&gt;'.</msg>
+<arg>${INPUT_DIR}/gitlab.json</arg>
+<arg>${OUTPUT_DIR}/gitlab.json</arg>
+<doc>Copies the source file into the destination.</doc>
+<status status="PASS" start="2026-10-06T13:01:00.920407" elapsed="0.049642"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:01:00.874135" elapsed="0.096030"/>
+</kw>
+<kw name="When GitLab group sync is executed">
+<kw name="Execute GitLab Group Synchronization">
+<kw name="Run Process" owner="Process">
+<msg time="2026-10-06T13:01:00.972793" level="INFO">Starting process:
+coverage run --parallel-mode -m repo_acl.main gitlab-groups --gitlab-url U --access-token X</msg>
+<msg time="2026-10-06T13:01:00.973823" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-10-06T13:01:01.458545" level="INFO">Process completed.</msg>
+<arg>coverage</arg>
+<arg>run</arg>
+<arg>--parallel-mode</arg>
+<arg>-m</arg>
+<arg>repo_acl.main</arg>
+<arg>gitlab-groups</arg>
+<arg>--gitlab-url</arg>
+<arg>U</arg>
+<arg>--access-token</arg>
+<arg>X</arg>
+<arg>@{dry_run}</arg>
+<arg>env:REPO_ACL_GROUPS_DIR=${INPUT_DIR}/groups</arg>
+<arg>env:FAKE_GITLAB_DB_PATH=${OUTPUT_DIR}/gitlab.json</arg>
+<arg>env:PEOPLEDB_DIR=${INPUT_DIR}/peopledb</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-10-06T13:01:00.971618" elapsed="0.487102"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:01:00.971008" elapsed="0.487861"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:01:00.970522" elapsed="0.488399"/>
+</kw>
+<kw name="Then The GitLab output should match the expected result">
+<kw name="Check Files Equal">
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:01.460762" level="INFO" html="true">Getting file '&lt;a href="file:///app/tests/TST001/output/gitlab.json"&gt;/app/tests/TST001/output/gitlab.json&lt;/a&gt;'.</msg>
+<msg time="2026-10-06T13:01:01.464812" level="INFO">${c1} = {
+    "users": [
+        {
+            "id": 1,
+            "name": "arunkumar.m",
+            "state": "active"
+        },
+        {
+            "id": 2,
+            "name": "pooja.k",
+            "s...</msg>
+<var>${c1}</var>
+<arg>${file1}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-10-06T13:01:01.460561" elapsed="0.004316"/>
+</kw>
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:01.465348" level="INFO" html="true">Getting file '&lt;a href="file:///app/tests/TST001/expected/gitlab.json"&gt;/app/tests/TST001/expected/gitlab.json&lt;/a&gt;'.</msg>
+<msg time="2026-10-06T13:01:01.475236" level="INFO">${c2} = {
+    "users": [
+        {
+            "id": 1,
+            "name": "arunkumar.m",
+            "state": "active"
+        },
+        {
+            "id": 2,
+            "name": "pooja.k",
+            "s...</msg>
+<var>${c2}</var>
+<arg>${file2}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-10-06T13:01:01.465087" elapsed="0.010212"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${c1}</arg>
+<arg>${c2}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-10-06T13:01:01.475520" elapsed="0.000500"/>
+</kw>
+<arg>${OUTPUT_DIR}/gitlab.json</arg>
+<arg>${EXP_DIR}/gitlab.json</arg>
+<status status="PASS" start="2026-10-06T13:01:01.459944" elapsed="0.016171"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:01:01.459274" elapsed="0.017168"/>
+</kw>
+<doc>REQ001</doc>
+<status status="PASS" start="2026-10-06T13:01:00.869308" elapsed="0.607354"/>
+</test>
+<test id="s1-s2-t2" name="Scenario: Impact on Assigned Issues and Merge Requests" line="62">
+<kw name="Given Test directories are initialized">
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:01:01.479858" level="INFO">${INPUT_DIR} = /app/tests/TST002/input</msg>
+<arg>${INPUT_DIR}</arg>
+<arg>/app/tests/${test_dir}/input</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:01:01.478722" elapsed="0.001232"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:01:01.480512" level="INFO">${OUTPUT_DIR} = /app/tests/TST002/output</msg>
+<arg>${OUTPUT_DIR}</arg>
+<arg>/app/tests/${test_dir}/output</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:01:01.480125" elapsed="0.000440"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:01:01.481317" level="INFO">${EXP_DIR} = /app/tests/TST002/expected</msg>
+<arg>${EXP_DIR}</arg>
+<arg>/app/tests/${test_dir}/expected</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:01:01.480705" elapsed="0.000672"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:01:01.482128" level="INFO">${PEOPLEDB_DIR} = /app/tests/peopledb</msg>
+<arg>${PEOPLEDB_DIR}</arg>
+<arg>/app/tests/peopledb</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:01:01.481522" elapsed="0.000659"/>
+</kw>
+<arg>TST002</arg>
+<status status="PASS" start="2026-10-06T13:01:01.478064" elapsed="0.004192"/>
+</kw>
+<kw name="And The GitLab database file is prepared">
+<kw name="Create Directory" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:01.490065" level="INFO" html="true">Created directory '&lt;a href="file:///app/tests/TST002/output"&gt;/app/tests/TST002/output&lt;/a&gt;'.</msg>
+<arg>${OUTPUT_DIR}</arg>
+<doc>Creates the specified directory.</doc>
+<status status="PASS" start="2026-10-06T13:01:01.482912" elapsed="0.007319"/>
+</kw>
+<kw name="Copy Directory" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:01.524551" level="INFO" html="true">Copied directory from '&lt;a href="file:///app/tests/peopledb/peopledb"&gt;/app/tests/peopledb/peopledb&lt;/a&gt;' to '&lt;a href="file:///app/tests/TST002/input/peopledb"&gt;/app/tests/TST002/input/peopledb&lt;/a&gt;'.</msg>
+<arg>${PEOPLEDB_DIR}/peopledb</arg>
+<arg>${INPUT_DIR}</arg>
+<doc>Copies the source directory into the destination.</doc>
+<status status="PASS" start="2026-10-06T13:01:01.490434" elapsed="0.034296"/>
+</kw>
+<kw name="Copy File" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:01.577806" level="INFO" html="true">Copied file from '&lt;a href="file:///app/tests/TST002/input/gitlab.json"&gt;/app/tests/TST002/input/gitlab.json&lt;/a&gt;' to '&lt;a href="file:///app/tests/TST002/output/gitlab.json"&gt;/app/tests/TST002/output/gitlab.json&lt;/a&gt;'.</msg>
+<arg>${INPUT_DIR}/gitlab.json</arg>
+<arg>${OUTPUT_DIR}/gitlab.json</arg>
+<doc>Copies the source file into the destination.</doc>
+<status status="PASS" start="2026-10-06T13:01:01.524979" elapsed="0.053022"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:01:01.482531" elapsed="0.095597"/>
+</kw>
+<kw name="When GitLab group sync is executed">
+<kw name="Execute GitLab Group Synchronization">
+<kw name="Run Process" owner="Process">
+<msg time="2026-10-06T13:01:01.581673" level="INFO">Starting process:
+coverage run --parallel-mode -m repo_acl.main gitlab-groups --gitlab-url U --access-token X</msg>
+<msg time="2026-10-06T13:01:01.582935" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-10-06T13:01:02.167528" level="INFO">Process completed.</msg>
+<arg>coverage</arg>
+<arg>run</arg>
+<arg>--parallel-mode</arg>
+<arg>-m</arg>
+<arg>repo_acl.main</arg>
+<arg>gitlab-groups</arg>
+<arg>--gitlab-url</arg>
+<arg>U</arg>
+<arg>--access-token</arg>
+<arg>X</arg>
+<arg>@{dry_run}</arg>
+<arg>env:REPO_ACL_GROUPS_DIR=${INPUT_DIR}/groups</arg>
+<arg>env:FAKE_GITLAB_DB_PATH=${OUTPUT_DIR}/gitlab.json</arg>
+<arg>env:PEOPLEDB_DIR=${INPUT_DIR}/peopledb</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-10-06T13:01:01.579755" elapsed="0.588016"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:01:01.579122" elapsed="0.588819"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:01:01.578528" elapsed="0.589465"/>
+</kw>
+<kw name="Then The GitLab output should match the expected result">
+<kw name="Check Files Equal">
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:02.169855" level="INFO" html="true">Getting file '&lt;a href="file:///app/tests/TST002/output/gitlab.json"&gt;/app/tests/TST002/output/gitlab.json&lt;/a&gt;'.</msg>
+<msg time="2026-10-06T13:01:02.173991" level="INFO">${c1} = {
+    "users": [
+        {
+            "id": 1,
+            "name": "arunkumar.m",
+            "state": "active"
+        },
+        {
+            "id": 2,
+            "name": "pooja.k",
+            "s...</msg>
+<var>${c1}</var>
+<arg>${file1}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-10-06T13:01:02.169543" elapsed="0.004518"/>
+</kw>
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:02.174523" level="INFO" html="true">Getting file '&lt;a href="file:///app/tests/TST002/expected/gitlab.json"&gt;/app/tests/TST002/expected/gitlab.json&lt;/a&gt;'.</msg>
+<msg time="2026-10-06T13:01:02.186340" level="INFO">${c2} = {
+    "users": [
+        {
+            "id": 1,
+            "name": "arunkumar.m",
+            "state": "active"
+        },
+        {
+            "id": 2,
+            "name": "pooja.k",
+            "s...</msg>
+<var>${c2}</var>
+<arg>${file2}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-10-06T13:01:02.174286" elapsed="0.012120"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${c1}</arg>
+<arg>${c2}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-10-06T13:01:02.186627" elapsed="0.000532"/>
+</kw>
+<arg>${OUTPUT_DIR}/gitlab.json</arg>
+<arg>${EXP_DIR}/gitlab.json</arg>
+<status status="PASS" start="2026-10-06T13:01:02.168893" elapsed="0.018367"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:01:02.168335" elapsed="0.018991"/>
+</kw>
+<doc>REQ002</doc>
+<status status="PASS" start="2026-10-06T13:01:01.477041" elapsed="0.710495"/>
+</test>
+<test id="s1-s2-t3" name="Scenario: Handling Gitlab blocked but Active in People DB" line="69">
+<kw name="Given Test directories are initialized">
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:01:02.191627" level="INFO">${INPUT_DIR} = /app/tests/TST003/input</msg>
+<arg>${INPUT_DIR}</arg>
+<arg>/app/tests/${test_dir}/input</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:01:02.190180" elapsed="0.001539"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:01:02.192453" level="INFO">${OUTPUT_DIR} = /app/tests/TST003/output</msg>
+<arg>${OUTPUT_DIR}</arg>
+<arg>/app/tests/${test_dir}/output</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:01:02.191936" elapsed="0.000577"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:01:02.193334" level="INFO">${EXP_DIR} = /app/tests/TST003/expected</msg>
+<arg>${EXP_DIR}</arg>
+<arg>/app/tests/${test_dir}/expected</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:01:02.192672" elapsed="0.000718"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:01:02.194163" level="INFO">${PEOPLEDB_DIR} = /app/tests/peopledb</msg>
+<arg>${PEOPLEDB_DIR}</arg>
+<arg>/app/tests/peopledb</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:01:02.193564" elapsed="0.001007"/>
+</kw>
+<arg>TST003</arg>
+<status status="PASS" start="2026-10-06T13:01:02.189206" elapsed="0.005460"/>
+</kw>
+<kw name="And The GitLab database file is prepared with peopledb">
+<kw name="Create Directory" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:02.201417" level="INFO" html="true">Created directory '&lt;a href="file:///app/tests/TST003/output"&gt;/app/tests/TST003/output&lt;/a&gt;'.</msg>
+<arg>${OUTPUT_DIR}</arg>
+<doc>Creates the specified directory.</doc>
+<status status="PASS" start="2026-10-06T13:01:02.195375" elapsed="0.006696"/>
+</kw>
+<kw name="Copy Directory" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:02.242116" level="INFO" html="true">Copied directory from '&lt;a href="file:///app/tests/peopledb/TST003/peopledb"&gt;/app/tests/peopledb/TST003/peopledb&lt;/a&gt;' to '&lt;a href="file:///app/tests/TST003/input/peopledb"&gt;/app/tests/TST003/input/peopledb&lt;/a&gt;'.</msg>
+<arg>${PEOPLEDB_DIR}/${test_dir}/peopledb</arg>
+<arg>${INPUT_DIR}</arg>
+<doc>Copies the source directory into the destination.</doc>
+<status status="PASS" start="2026-10-06T13:01:02.202277" elapsed="0.040005"/>
+</kw>
+<kw name="Copy File" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:02.289577" level="INFO" html="true">Copied file from '&lt;a href="file:///app/tests/TST003/input/gitlab.json"&gt;/app/tests/TST003/input/gitlab.json&lt;/a&gt;' to '&lt;a href="file:///app/tests/TST003/output/gitlab.json"&gt;/app/tests/TST003/output/gitlab.json&lt;/a&gt;'.</msg>
+<arg>${INPUT_DIR}/gitlab.json</arg>
+<arg>${OUTPUT_DIR}/gitlab.json</arg>
+<doc>Copies the source file into the destination.</doc>
+<status status="PASS" start="2026-10-06T13:01:02.242499" elapsed="0.047294"/>
+</kw>
+<arg>TST003</arg>
+<status status="PASS" start="2026-10-06T13:01:02.194965" elapsed="0.094950"/>
+</kw>
+<kw name="When GitLab group sync is executed">
+<kw name="Execute GitLab Group Synchronization">
+<kw name="Run Process" owner="Process">
+<msg time="2026-10-06T13:01:02.292447" level="INFO">Starting process:
+coverage run --parallel-mode -m repo_acl.main gitlab-groups --gitlab-url U --access-token X</msg>
+<msg time="2026-10-06T13:01:02.293387" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-10-06T13:01:02.792064" level="INFO">Process completed.</msg>
+<arg>coverage</arg>
+<arg>run</arg>
+<arg>--parallel-mode</arg>
+<arg>-m</arg>
+<arg>repo_acl.main</arg>
+<arg>gitlab-groups</arg>
+<arg>--gitlab-url</arg>
+<arg>U</arg>
+<arg>--access-token</arg>
+<arg>X</arg>
+<arg>@{dry_run}</arg>
+<arg>env:REPO_ACL_GROUPS_DIR=${INPUT_DIR}/groups</arg>
+<arg>env:FAKE_GITLAB_DB_PATH=${OUTPUT_DIR}/gitlab.json</arg>
+<arg>env:PEOPLEDB_DIR=${INPUT_DIR}/peopledb</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-10-06T13:01:02.291243" elapsed="0.501131"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:01:02.290725" elapsed="0.501892"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:01:02.290263" elapsed="0.502407"/>
+</kw>
+<kw name="Then The GitLab output should match the expected result">
+<kw name="Check Files Equal">
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:02.794662" level="INFO" html="true">Getting file '&lt;a href="file:///app/tests/TST003/output/gitlab.json"&gt;/app/tests/TST003/output/gitlab.json&lt;/a&gt;'.</msg>
+<msg time="2026-10-06T13:01:02.799532" level="INFO">${c1} = {
+    "users": [
+        {
+            "id": 1,
+            "name": "arunkumar.m",
+            "state": "blocked"
+        },
+        {
+            "id": 2,
+            "name": "nandhini.s",
+          ...</msg>
+<var>${c1}</var>
+<arg>${file1}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-10-06T13:01:02.794430" elapsed="0.005175"/>
+</kw>
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:02.800001" level="INFO" html="true">Getting file '&lt;a href="file:///app/tests/TST003/expected/gitlab.json"&gt;/app/tests/TST003/expected/gitlab.json&lt;/a&gt;'.</msg>
+<msg time="2026-10-06T13:01:02.816178" level="INFO">${c2} = {
+    "users": [
+        {
+            "id": 1,
+            "name": "arunkumar.m",
+            "state": "blocked"
+        },
+        {
+            "id": 2,
+            "name": "nandhini.s",
+          ...</msg>
+<var>${c2}</var>
+<arg>${file2}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-10-06T13:01:02.799799" elapsed="0.016444"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${c1}</arg>
+<arg>${c2}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-10-06T13:01:02.816471" elapsed="0.000512"/>
+</kw>
+<arg>${OUTPUT_DIR}/gitlab.json</arg>
+<arg>${EXP_DIR}/gitlab.json</arg>
+<status status="PASS" start="2026-10-06T13:01:02.793672" elapsed="0.023409"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:01:02.793058" elapsed="0.024089"/>
+</kw>
+<doc>REQ003</doc>
+<status status="PASS" start="2026-10-06T13:01:02.187884" elapsed="0.629531"/>
+</test>
+<test id="s1-s2-t4" name="Scenario: Group not present in Gitlab" line="76">
+<kw name="Given Test directories are initialized">
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:01:02.821204" level="INFO">${INPUT_DIR} = /app/tests/TST004/input</msg>
+<arg>${INPUT_DIR}</arg>
+<arg>/app/tests/${test_dir}/input</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:01:02.820215" elapsed="0.001091"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:01:02.822138" level="INFO">${OUTPUT_DIR} = /app/tests/TST004/output</msg>
+<arg>${OUTPUT_DIR}</arg>
+<arg>/app/tests/${test_dir}/output</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:01:02.821567" elapsed="0.000642"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:01:02.823133" level="INFO">${EXP_DIR} = /app/tests/TST004/expected</msg>
+<arg>${EXP_DIR}</arg>
+<arg>/app/tests/${test_dir}/expected</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:01:02.822400" elapsed="0.000801"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:01:02.823979" level="INFO">${PEOPLEDB_DIR} = /app/tests/peopledb</msg>
+<arg>${PEOPLEDB_DIR}</arg>
+<arg>/app/tests/peopledb</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:01:02.823395" elapsed="0.000639"/>
+</kw>
+<arg>TST004</arg>
+<status status="PASS" start="2026-10-06T13:01:02.819053" elapsed="0.005062"/>
+</kw>
+<kw name="And The GitLab database file is prepared">
+<kw name="Create Directory" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:02.829463" level="INFO" html="true">Created directory '&lt;a href="file:///app/tests/TST004/output"&gt;/app/tests/TST004/output&lt;/a&gt;'.</msg>
+<arg>${OUTPUT_DIR}</arg>
+<doc>Creates the specified directory.</doc>
+<status status="PASS" start="2026-10-06T13:01:02.824806" elapsed="0.004817"/>
+</kw>
+<kw name="Copy Directory" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:02.865526" level="INFO" html="true">Copied directory from '&lt;a href="file:///app/tests/peopledb/peopledb"&gt;/app/tests/peopledb/peopledb&lt;/a&gt;' to '&lt;a href="file:///app/tests/TST004/input/peopledb"&gt;/app/tests/TST004/input/peopledb&lt;/a&gt;'.</msg>
+<arg>${PEOPLEDB_DIR}/peopledb</arg>
+<arg>${INPUT_DIR}</arg>
+<doc>Copies the source directory into the destination.</doc>
+<status status="PASS" start="2026-10-06T13:01:02.829853" elapsed="0.035839"/>
+</kw>
+<kw name="Copy File" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:02.908898" level="INFO" html="true">Copied file from '&lt;a href="file:///app/tests/TST004/input/gitlab.json"&gt;/app/tests/TST004/input/gitlab.json&lt;/a&gt;' to '&lt;a href="file:///app/tests/TST004/output/gitlab.json"&gt;/app/tests/TST004/output/gitlab.json&lt;/a&gt;'.</msg>
+<arg>${INPUT_DIR}/gitlab.json</arg>
+<arg>${OUTPUT_DIR}/gitlab.json</arg>
+<doc>Copies the source file into the destination.</doc>
+<status status="PASS" start="2026-10-06T13:01:02.865961" elapsed="0.043284"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:01:02.824429" elapsed="0.084943"/>
+</kw>
+<kw name="When GitLab group sync is executed">
+<kw name="Execute GitLab Group Synchronization">
+<kw name="Run Process" owner="Process">
+<msg time="2026-10-06T13:01:02.912148" level="INFO">Starting process:
+coverage run --parallel-mode -m repo_acl.main gitlab-groups --gitlab-url U --access-token X</msg>
+<msg time="2026-10-06T13:01:02.913000" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-10-06T13:01:03.512864" level="INFO">Process completed.</msg>
+<arg>coverage</arg>
+<arg>run</arg>
+<arg>--parallel-mode</arg>
+<arg>-m</arg>
+<arg>repo_acl.main</arg>
+<arg>gitlab-groups</arg>
+<arg>--gitlab-url</arg>
+<arg>U</arg>
+<arg>--access-token</arg>
+<arg>X</arg>
+<arg>@{dry_run}</arg>
+<arg>env:REPO_ACL_GROUPS_DIR=${INPUT_DIR}/groups</arg>
+<arg>env:FAKE_GITLAB_DB_PATH=${OUTPUT_DIR}/gitlab.json</arg>
+<arg>env:PEOPLEDB_DIR=${INPUT_DIR}/peopledb</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-10-06T13:01:02.910795" elapsed="0.602219"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:01:02.910296" elapsed="0.602869"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:01:02.909758" elapsed="0.603461"/>
+</kw>
+<kw name="Then The GitLab output should match the expected result">
+<kw name="Check Files Equal">
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:03.515468" level="INFO" html="true">Getting file '&lt;a href="file:///app/tests/TST004/output/gitlab.json"&gt;/app/tests/TST004/output/gitlab.json&lt;/a&gt;'.</msg>
+<msg time="2026-10-06T13:01:03.519318" level="INFO">${c1} = {
+    "users": [
+        {
+            "id": 1,
+            "name": "arunkumar.m",
+            "state": "active"
+        },
+        {
+            "id": 2,
+            "name": "pooja.k",
+            "s...</msg>
+<var>${c1}</var>
+<arg>${file1}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-10-06T13:01:03.515098" elapsed="0.004275"/>
+</kw>
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:03.519768" level="INFO" html="true">Getting file '&lt;a href="file:///app/tests/TST004/expected/gitlab.json"&gt;/app/tests/TST004/expected/gitlab.json&lt;/a&gt;'.</msg>
+<msg time="2026-10-06T13:01:03.530117" level="INFO">${c2} = {
+    "users": [
+        {
+            "id": 1,
+            "name": "arunkumar.m",
+            "state": "active"
+        },
+        {
+            "id": 2,
+            "name": "pooja.k",
+            "s...</msg>
+<var>${c2}</var>
+<arg>${file2}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-10-06T13:01:03.519572" elapsed="0.010611"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${c1}</arg>
+<arg>${c2}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-10-06T13:01:03.530409" elapsed="0.000483"/>
+</kw>
+<arg>${OUTPUT_DIR}/gitlab.json</arg>
+<arg>${EXP_DIR}/gitlab.json</arg>
+<status status="PASS" start="2026-10-06T13:01:03.514398" elapsed="0.016593"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:01:03.513583" elapsed="0.017472"/>
+</kw>
+<doc>REQ004</doc>
+<status status="PASS" start="2026-10-06T13:01:02.817988" elapsed="0.713404"/>
+</test>
+<test id="s1-s2-t5" name="Scenario: Gitlab parent group not available" line="83">
+<kw name="Given Test directories are initialized">
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:01:03.534980" level="INFO">${INPUT_DIR} = /app/tests/TST005/input</msg>
+<arg>${INPUT_DIR}</arg>
+<arg>/app/tests/${test_dir}/input</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:01:03.534203" elapsed="0.000847"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:01:03.535652" level="INFO">${OUTPUT_DIR} = /app/tests/TST005/output</msg>
+<arg>${OUTPUT_DIR}</arg>
+<arg>/app/tests/${test_dir}/output</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:01:03.535225" elapsed="0.000482"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:01:03.536488" level="INFO">${EXP_DIR} = /app/tests/TST005/expected</msg>
+<arg>${EXP_DIR}</arg>
+<arg>/app/tests/${test_dir}/expected</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:01:03.535848" elapsed="0.000695"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:01:03.537213" level="INFO">${PEOPLEDB_DIR} = /app/tests/peopledb</msg>
+<arg>${PEOPLEDB_DIR}</arg>
+<arg>/app/tests/peopledb</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:01:03.536680" elapsed="0.000588"/>
+</kw>
+<arg>TST005</arg>
+<status status="PASS" start="2026-10-06T13:01:03.533024" elapsed="0.004348"/>
+</kw>
+<kw name="And The GitLab database file is prepared">
+<kw name="Create Directory" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:03.543147" level="INFO" html="true">Created directory '&lt;a href="file:///app/tests/TST005/output"&gt;/app/tests/TST005/output&lt;/a&gt;'.</msg>
+<arg>${OUTPUT_DIR}</arg>
+<doc>Creates the specified directory.</doc>
+<status status="PASS" start="2026-10-06T13:01:03.538078" elapsed="0.005214"/>
+</kw>
+<kw name="Copy Directory" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:03.577520" level="INFO" html="true">Copied directory from '&lt;a href="file:///app/tests/peopledb/peopledb"&gt;/app/tests/peopledb/peopledb&lt;/a&gt;' to '&lt;a href="file:///app/tests/TST005/input/peopledb"&gt;/app/tests/TST005/input/peopledb&lt;/a&gt;'.</msg>
+<arg>${PEOPLEDB_DIR}/peopledb</arg>
+<arg>${INPUT_DIR}</arg>
+<doc>Copies the source directory into the destination.</doc>
+<status status="PASS" start="2026-10-06T13:01:03.543483" elapsed="0.034207"/>
+</kw>
+<kw name="Copy File" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:03.634640" level="INFO" html="true">Copied file from '&lt;a href="file:///app/tests/TST005/input/gitlab.json"&gt;/app/tests/TST005/input/gitlab.json&lt;/a&gt;' to '&lt;a href="file:///app/tests/TST005/output/gitlab.json"&gt;/app/tests/TST005/output/gitlab.json&lt;/a&gt;'.</msg>
+<arg>${INPUT_DIR}/gitlab.json</arg>
+<arg>${OUTPUT_DIR}/gitlab.json</arg>
+<doc>Copies the source file into the destination.</doc>
+<status status="PASS" start="2026-10-06T13:01:03.577988" elapsed="0.056813"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:01:03.537677" elapsed="0.097242"/>
+</kw>
+<kw name="When GitLab group sync is executed">
+<kw name="Execute GitLab Group Synchronization">
+<kw name="Run Process" owner="Process">
+<msg time="2026-10-06T13:01:03.637373" level="INFO">Starting process:
+coverage run --parallel-mode -m repo_acl.main gitlab-groups --gitlab-url U --access-token X</msg>
+<msg time="2026-10-06T13:01:03.639048" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-10-06T13:01:04.855754" level="INFO">Process completed.</msg>
+<arg>coverage</arg>
+<arg>run</arg>
+<arg>--parallel-mode</arg>
+<arg>-m</arg>
+<arg>repo_acl.main</arg>
+<arg>gitlab-groups</arg>
+<arg>--gitlab-url</arg>
+<arg>U</arg>
+<arg>--access-token</arg>
+<arg>X</arg>
+<arg>@{dry_run}</arg>
+<arg>env:REPO_ACL_GROUPS_DIR=${INPUT_DIR}/groups</arg>
+<arg>env:FAKE_GITLAB_DB_PATH=${OUTPUT_DIR}/gitlab.json</arg>
+<arg>env:PEOPLEDB_DIR=${INPUT_DIR}/peopledb</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-10-06T13:01:03.636288" elapsed="1.219642"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:01:03.635763" elapsed="1.220330"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:01:03.635274" elapsed="1.220875"/>
+</kw>
+<kw name="Then The GitLab output should match the expected result">
+<kw name="Check Files Equal">
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:04.858823" level="INFO" html="true">Getting file '&lt;a href="file:///app/tests/TST005/output/gitlab.json"&gt;/app/tests/TST005/output/gitlab.json&lt;/a&gt;'.</msg>
+<msg time="2026-10-06T13:01:04.863764" level="INFO">${c1} = {
+    "users": [
+        {
+            "id": 1,
+            "name": "arunkumar.m",
+            "state": "active"
+        },
+        {
+            "id": 2,
+            "name": "pooja.k",
+            "s...</msg>
+<var>${c1}</var>
+<arg>${file1}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-10-06T13:01:04.857821" elapsed="0.006063"/>
+</kw>
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:04.864960" level="INFO" html="true">Getting file '&lt;a href="file:///app/tests/TST005/expected/gitlab.json"&gt;/app/tests/TST005/expected/gitlab.json&lt;/a&gt;'.</msg>
+<msg time="2026-10-06T13:01:04.875518" level="INFO">${c2} = {
+    "users": [
+        {
+            "id": 1,
+            "name": "arunkumar.m",
+            "state": "active"
+        },
+        {
+            "id": 2,
+            "name": "pooja.k",
+            "s...</msg>
+<var>${c2}</var>
+<arg>${file2}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-10-06T13:01:04.864287" elapsed="0.011303"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${c1}</arg>
+<arg>${c2}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-10-06T13:01:04.875833" elapsed="0.000492"/>
+</kw>
+<arg>${OUTPUT_DIR}/gitlab.json</arg>
+<arg>${EXP_DIR}/gitlab.json</arg>
+<status status="PASS" start="2026-10-06T13:01:04.857038" elapsed="0.019381"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:01:04.856532" elapsed="0.019953"/>
+</kw>
+<doc>REQ005</doc>
+<status status="PASS" start="2026-10-06T13:01:03.531969" elapsed="1.344745"/>
+</test>
+<test id="s1-s2-t6" name="Scenario: Execute Gitlab Groups in dry-run mode" line="90">
+<kw name="Given Test directories are initialized">
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:01:04.881118" level="INFO">${INPUT_DIR} = /app/tests/TST006/input</msg>
+<arg>${INPUT_DIR}</arg>
+<arg>/app/tests/${test_dir}/input</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:01:04.880108" elapsed="0.001088"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:01:04.881796" level="INFO">${OUTPUT_DIR} = /app/tests/TST006/output</msg>
+<arg>${OUTPUT_DIR}</arg>
+<arg>/app/tests/${test_dir}/output</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:01:04.881388" elapsed="0.000462"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:01:04.882629" level="INFO">${EXP_DIR} = /app/tests/TST006/expected</msg>
+<arg>${EXP_DIR}</arg>
+<arg>/app/tests/${test_dir}/expected</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:01:04.881996" elapsed="0.000715"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:01:04.883418" level="INFO">${PEOPLEDB_DIR} = /app/tests/peopledb</msg>
+<arg>${PEOPLEDB_DIR}</arg>
+<arg>/app/tests/peopledb</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:01:04.882883" elapsed="0.000587"/>
+</kw>
+<arg>TST006</arg>
+<status status="PASS" start="2026-10-06T13:01:04.878472" elapsed="0.005078"/>
+</kw>
+<kw name="And The GitLab database file is prepared">
+<kw name="Create Directory" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:04.889912" level="INFO" html="true">Created directory '&lt;a href="file:///app/tests/TST006/output"&gt;/app/tests/TST006/output&lt;/a&gt;'.</msg>
+<arg>${OUTPUT_DIR}</arg>
+<doc>Creates the specified directory.</doc>
+<status status="PASS" start="2026-10-06T13:01:04.884239" elapsed="0.005857"/>
+</kw>
+<kw name="Copy Directory" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:04.924204" level="INFO" html="true">Copied directory from '&lt;a href="file:///app/tests/peopledb/peopledb"&gt;/app/tests/peopledb/peopledb&lt;/a&gt;' to '&lt;a href="file:///app/tests/TST006/input/peopledb"&gt;/app/tests/TST006/input/peopledb&lt;/a&gt;'.</msg>
+<arg>${PEOPLEDB_DIR}/peopledb</arg>
+<arg>${INPUT_DIR}</arg>
+<doc>Copies the source directory into the destination.</doc>
+<status status="PASS" start="2026-10-06T13:01:04.890322" elapsed="0.034039"/>
+</kw>
+<kw name="Copy File" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:04.965868" level="INFO" html="true">Copied file from '&lt;a href="file:///app/tests/TST006/input/gitlab.json"&gt;/app/tests/TST006/input/gitlab.json&lt;/a&gt;' to '&lt;a href="file:///app/tests/TST006/output/gitlab.json"&gt;/app/tests/TST006/output/gitlab.json&lt;/a&gt;'.</msg>
+<arg>${INPUT_DIR}/gitlab.json</arg>
+<arg>${OUTPUT_DIR}/gitlab.json</arg>
+<doc>Copies the source file into the destination.</doc>
+<status status="PASS" start="2026-10-06T13:01:04.924574" elapsed="0.041453"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:01:04.883842" elapsed="0.082301"/>
+</kw>
+<kw name="When GitLab group sync is executed with dry-run">
+<kw name="Execute GitLab Group Synchronization">
+<kw name="Run Process" owner="Process">
+<msg time="2026-10-06T13:01:04.968763" level="INFO">Starting process:
+coverage run --parallel-mode -m repo_acl.main gitlab-groups --gitlab-url U --access-token X --dry-run</msg>
+<msg time="2026-10-06T13:01:04.969569" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-10-06T13:01:06.253609" level="INFO">Process completed.</msg>
+<arg>coverage</arg>
+<arg>run</arg>
+<arg>--parallel-mode</arg>
+<arg>-m</arg>
+<arg>repo_acl.main</arg>
+<arg>gitlab-groups</arg>
+<arg>--gitlab-url</arg>
+<arg>U</arg>
+<arg>--access-token</arg>
+<arg>X</arg>
+<arg>@{dry_run}</arg>
+<arg>env:REPO_ACL_GROUPS_DIR=${INPUT_DIR}/groups</arg>
+<arg>env:FAKE_GITLAB_DB_PATH=${OUTPUT_DIR}/gitlab.json</arg>
+<arg>env:PEOPLEDB_DIR=${INPUT_DIR}/peopledb</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-10-06T13:01:04.967588" elapsed="1.286212"/>
+</kw>
+<arg>--dry-run</arg>
+<status status="PASS" start="2026-10-06T13:01:04.967092" elapsed="1.286930"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:01:04.966492" elapsed="1.287599"/>
+</kw>
+<kw name="Then The GitLab output should match the expected result">
+<kw name="Check Files Equal">
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:06.256428" level="INFO" html="true">Getting file '&lt;a href="file:///app/tests/TST006/output/gitlab.json"&gt;/app/tests/TST006/output/gitlab.json&lt;/a&gt;'.</msg>
+<msg time="2026-10-06T13:01:06.260960" level="INFO">${c1} = {
+    "users": [
+        {
+            "id": 1,
+            "name": "arunkumar.m",
+            "state": "active"
+        },
+        {
+            "id": 2,
+            "name": "pooja.k",
+            "s...</msg>
+<var>${c1}</var>
+<arg>${file1}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-10-06T13:01:06.256014" elapsed="0.005003"/>
+</kw>
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:06.261408" level="INFO" html="true">Getting file '&lt;a href="file:///app/tests/TST006/expected/gitlab.json"&gt;/app/tests/TST006/expected/gitlab.json&lt;/a&gt;'.</msg>
+<msg time="2026-10-06T13:01:06.265792" level="INFO">${c2} = {
+    "users": [
+        {
+            "id": 1,
+            "name": "arunkumar.m",
+            "state": "active"
+        },
+        {
+            "id": 2,
+            "name": "pooja.k",
+            "s...</msg>
+<var>${c2}</var>
+<arg>${file2}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-10-06T13:01:06.261214" elapsed="0.004642"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${c1}</arg>
+<arg>${c2}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-10-06T13:01:06.266075" elapsed="0.000460"/>
+</kw>
+<arg>${OUTPUT_DIR}/gitlab.json</arg>
+<arg>${EXP_DIR}/gitlab.json</arg>
+<status status="PASS" start="2026-10-06T13:01:06.255179" elapsed="0.011446"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:01:06.254480" elapsed="0.012536"/>
+</kw>
+<doc>REQ006</doc>
+<status status="PASS" start="2026-10-06T13:01:04.877278" elapsed="1.389971"/>
+</test>
+<test id="s1-s2-t7" name="Scenario: Test Malformed group definition file in Git" line="97">
+<kw name="Given Test directories are initialized">
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:01:06.270973" level="INFO">${INPUT_DIR} = /app/tests/TST007/input</msg>
+<arg>${INPUT_DIR}</arg>
+<arg>/app/tests/${test_dir}/input</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:01:06.270228" elapsed="0.000813"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:01:06.271574" level="INFO">${OUTPUT_DIR} = /app/tests/TST007/output</msg>
+<arg>${OUTPUT_DIR}</arg>
+<arg>/app/tests/${test_dir}/output</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:01:06.271206" elapsed="0.000420"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:01:06.272445" level="INFO">${EXP_DIR} = /app/tests/TST007/expected</msg>
+<arg>${EXP_DIR}</arg>
+<arg>/app/tests/${test_dir}/expected</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:01:06.271776" elapsed="0.000730"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:01:06.273211" level="INFO">${PEOPLEDB_DIR} = /app/tests/peopledb</msg>
+<arg>${PEOPLEDB_DIR}</arg>
+<arg>/app/tests/peopledb</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:01:06.272649" elapsed="0.000614"/>
+</kw>
+<arg>TST007</arg>
+<status status="PASS" start="2026-10-06T13:01:06.269171" elapsed="0.004167"/>
+</kw>
+<kw name="And The GitLab database file is prepared">
+<kw name="Create Directory" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:06.278563" level="INFO" html="true">Created directory '&lt;a href="file:///app/tests/TST007/output"&gt;/app/tests/TST007/output&lt;/a&gt;'.</msg>
+<arg>${OUTPUT_DIR}</arg>
+<doc>Creates the specified directory.</doc>
+<status status="PASS" start="2026-10-06T13:01:06.274007" elapsed="0.004753"/>
+</kw>
+<kw name="Copy Directory" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:06.314048" level="INFO" html="true">Copied directory from '&lt;a href="file:///app/tests/peopledb/peopledb"&gt;/app/tests/peopledb/peopledb&lt;/a&gt;' to '&lt;a href="file:///app/tests/TST007/input/peopledb"&gt;/app/tests/TST007/input/peopledb&lt;/a&gt;'.</msg>
+<arg>${PEOPLEDB_DIR}/peopledb</arg>
+<arg>${INPUT_DIR}</arg>
+<doc>Copies the source directory into the destination.</doc>
+<status status="PASS" start="2026-10-06T13:01:06.279094" elapsed="0.035143"/>
+</kw>
+<kw name="Copy File" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:06.354798" level="INFO" html="true">Copied file from '&lt;a href="file:///app/tests/TST007/input/gitlab.json"&gt;/app/tests/TST007/input/gitlab.json&lt;/a&gt;' to '&lt;a href="file:///app/tests/TST007/output/gitlab.json"&gt;/app/tests/TST007/output/gitlab.json&lt;/a&gt;'.</msg>
+<arg>${INPUT_DIR}/gitlab.json</arg>
+<arg>${OUTPUT_DIR}/gitlab.json</arg>
+<doc>Copies the source file into the destination.</doc>
+<status status="PASS" start="2026-10-06T13:01:06.314460" elapsed="0.040502"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:01:06.273611" elapsed="0.081470"/>
+</kw>
+<kw name="When GitLab group sync is executed">
+<kw name="Execute GitLab Group Synchronization">
+<kw name="Run Process" owner="Process">
+<msg time="2026-10-06T13:01:06.357751" level="INFO">Starting process:
+coverage run --parallel-mode -m repo_acl.main gitlab-groups --gitlab-url U --access-token X</msg>
+<msg time="2026-10-06T13:01:06.359376" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-10-06T13:01:06.834118" level="INFO">Process completed.</msg>
+<arg>coverage</arg>
+<arg>run</arg>
+<arg>--parallel-mode</arg>
+<arg>-m</arg>
+<arg>repo_acl.main</arg>
+<arg>gitlab-groups</arg>
+<arg>--gitlab-url</arg>
+<arg>U</arg>
+<arg>--access-token</arg>
+<arg>X</arg>
+<arg>@{dry_run}</arg>
+<arg>env:REPO_ACL_GROUPS_DIR=${INPUT_DIR}/groups</arg>
+<arg>env:FAKE_GITLAB_DB_PATH=${OUTPUT_DIR}/gitlab.json</arg>
+<arg>env:PEOPLEDB_DIR=${INPUT_DIR}/peopledb</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-10-06T13:01:06.356505" elapsed="0.477829"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:01:06.356024" elapsed="0.478477"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:01:06.355442" elapsed="0.479118"/>
+</kw>
+<kw name="Then The GitLab output should match the expected result">
+<kw name="Check Files Equal">
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:06.836805" level="INFO" html="true">Getting file '&lt;a href="file:///app/tests/TST007/output/gitlab.json"&gt;/app/tests/TST007/output/gitlab.json&lt;/a&gt;'.</msg>
+<msg time="2026-10-06T13:01:06.841244" level="INFO">${c1} = {
+    "users": [
+        {
+            "id": 1,
+            "name": "arunkumar.m",
+            "state": "active"
+        },
+        {
+            "id": 2,
+            "name": "pooja.k",
+            "s...</msg>
+<var>${c1}</var>
+<arg>${file1}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-10-06T13:01:06.836464" elapsed="0.004841"/>
+</kw>
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:06.841708" level="INFO" html="true">Getting file '&lt;a href="file:///app/tests/TST007/expected/gitlab.json"&gt;/app/tests/TST007/expected/gitlab.json&lt;/a&gt;'.</msg>
+<msg time="2026-10-06T13:01:06.845311" level="INFO">${c2} = {
+    "users": [
+        {
+            "id": 1,
+            "name": "arunkumar.m",
+            "state": "active"
+        },
+        {
+            "id": 2,
+            "name": "pooja.k",
+            "s...</msg>
+<var>${c2}</var>
+<arg>${file2}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-10-06T13:01:06.841506" elapsed="0.003863"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${c1}</arg>
+<arg>${c2}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-10-06T13:01:06.845591" elapsed="0.000471"/>
+</kw>
+<arg>${OUTPUT_DIR}/gitlab.json</arg>
+<arg>${EXP_DIR}/gitlab.json</arg>
+<status status="PASS" start="2026-10-06T13:01:06.835545" elapsed="0.010607"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:01:06.834976" elapsed="0.011240"/>
+</kw>
+<doc>REQ007</doc>
+<status status="PASS" start="2026-10-06T13:01:06.267679" elapsed="0.578749"/>
+</test>
+<test id="s1-s2-t8" name="Scenario: Git group location not available" line="104">
+<kw name="Given Test directories are initialized">
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:01:06.848814" level="INFO">${INPUT_DIR} = /app/tests/TST008/input</msg>
+<arg>${INPUT_DIR}</arg>
+<arg>/app/tests/${test_dir}/input</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:01:06.848093" elapsed="0.000791"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:01:06.849431" level="INFO">${OUTPUT_DIR} = /app/tests/TST008/output</msg>
+<arg>${OUTPUT_DIR}</arg>
+<arg>/app/tests/${test_dir}/output</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:01:06.849043" elapsed="0.000440"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:01:06.850299" level="INFO">${EXP_DIR} = /app/tests/TST008/expected</msg>
+<arg>${EXP_DIR}</arg>
+<arg>/app/tests/${test_dir}/expected</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:01:06.849622" elapsed="0.000752"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:01:06.852208" level="INFO">${PEOPLEDB_DIR} = /app/tests/peopledb</msg>
+<arg>${PEOPLEDB_DIR}</arg>
+<arg>/app/tests/peopledb</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:01:06.850565" elapsed="0.001717"/>
+</kw>
+<arg>TST008</arg>
+<status status="PASS" start="2026-10-06T13:01:06.847658" elapsed="0.004717"/>
+</kw>
+<kw name="And The GitLab database file is prepared">
+<kw name="Create Directory" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:06.858147" level="INFO" html="true">Created directory '&lt;a href="file:///app/tests/TST008/output"&gt;/app/tests/TST008/output&lt;/a&gt;'.</msg>
+<arg>${OUTPUT_DIR}</arg>
+<doc>Creates the specified directory.</doc>
+<status status="PASS" start="2026-10-06T13:01:06.853124" elapsed="0.005169"/>
+</kw>
+<kw name="Copy Directory" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:06.891100" level="INFO" html="true">Copied directory from '&lt;a href="file:///app/tests/peopledb/peopledb"&gt;/app/tests/peopledb/peopledb&lt;/a&gt;' to '&lt;a href="file:///app/tests/TST008/input/peopledb"&gt;/app/tests/TST008/input/peopledb&lt;/a&gt;'.</msg>
+<arg>${PEOPLEDB_DIR}/peopledb</arg>
+<arg>${INPUT_DIR}</arg>
+<doc>Copies the source directory into the destination.</doc>
+<status status="PASS" start="2026-10-06T13:01:06.858479" elapsed="0.032786"/>
+</kw>
+<kw name="Copy File" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:06.930659" level="INFO" html="true">Copied file from '&lt;a href="file:///app/tests/TST008/input/gitlab.json"&gt;/app/tests/TST008/input/gitlab.json&lt;/a&gt;' to '&lt;a href="file:///app/tests/TST008/output/gitlab.json"&gt;/app/tests/TST008/output/gitlab.json&lt;/a&gt;'.</msg>
+<arg>${INPUT_DIR}/gitlab.json</arg>
+<arg>${OUTPUT_DIR}/gitlab.json</arg>
+<doc>Copies the source file into the destination.</doc>
+<status status="PASS" start="2026-10-06T13:01:06.891478" elapsed="0.039343"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:01:06.852685" elapsed="0.078255"/>
+</kw>
+<kw name="When GitLab group sync is executed">
+<kw name="Execute GitLab Group Synchronization">
+<kw name="Run Process" owner="Process">
+<msg time="2026-10-06T13:01:06.933772" level="INFO">Starting process:
+coverage run --parallel-mode -m repo_acl.main gitlab-groups --gitlab-url U --access-token X</msg>
+<msg time="2026-10-06T13:01:06.934719" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-10-06T13:01:07.415648" level="INFO">Process completed.</msg>
+<arg>coverage</arg>
+<arg>run</arg>
+<arg>--parallel-mode</arg>
+<arg>-m</arg>
+<arg>repo_acl.main</arg>
+<arg>gitlab-groups</arg>
+<arg>--gitlab-url</arg>
+<arg>U</arg>
+<arg>--access-token</arg>
+<arg>X</arg>
+<arg>@{dry_run}</arg>
+<arg>env:REPO_ACL_GROUPS_DIR=${INPUT_DIR}/groups</arg>
+<arg>env:FAKE_GITLAB_DB_PATH=${OUTPUT_DIR}/gitlab.json</arg>
+<arg>env:PEOPLEDB_DIR=${INPUT_DIR}/peopledb</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-10-06T13:01:06.932412" elapsed="0.483649"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:01:06.931858" elapsed="0.484415"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:01:06.931301" elapsed="0.485058"/>
+</kw>
+<kw name="Then The GitLab output should match the expected result">
+<kw name="Check Files Equal">
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:07.418553" level="INFO" html="true">Getting file '&lt;a href="file:///app/tests/TST008/output/gitlab.json"&gt;/app/tests/TST008/output/gitlab.json&lt;/a&gt;'.</msg>
+<msg time="2026-10-06T13:01:07.423009" level="INFO">${c1} = {
+    "users": [
+        {
+            "id": 1,
+            "name": "arunkumar.m",
+            "state": "active"
+        },
+        {
+            "id": 2,
+            "name": "pooja.k",
+            "s...</msg>
+<var>${c1}</var>
+<arg>${file1}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-10-06T13:01:07.418206" elapsed="0.004874"/>
+</kw>
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:07.423550" level="INFO" html="true">Getting file '&lt;a href="file:///app/tests/TST008/expected/gitlab.json"&gt;/app/tests/TST008/expected/gitlab.json&lt;/a&gt;'.</msg>
+<msg time="2026-10-06T13:01:07.427857" level="INFO">${c2} = {
+    "users": [
+        {
+            "id": 1,
+            "name": "arunkumar.m",
+            "state": "active"
+        },
+        {
+            "id": 2,
+            "name": "pooja.k",
+            "s...</msg>
+<var>${c2}</var>
+<arg>${file2}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-10-06T13:01:07.423317" elapsed="0.004683"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${c1}</arg>
+<arg>${c2}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-10-06T13:01:07.428407" elapsed="0.000718"/>
+</kw>
+<arg>${OUTPUT_DIR}/gitlab.json</arg>
+<arg>${EXP_DIR}/gitlab.json</arg>
+<status status="PASS" start="2026-10-06T13:01:07.417531" elapsed="0.011728"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:01:07.416884" elapsed="0.012445"/>
+</kw>
+<doc>REQ008</doc>
+<status status="PASS" start="2026-10-06T13:01:06.846874" elapsed="0.582789"/>
+</test>
+<test id="s1-s2-t9" name="Scenario: User not found in GitLab but Active in peopledb" line="118">
+<kw name="Given Test directories are initialized">
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:01:07.433960" level="INFO">${INPUT_DIR} = /app/tests/TST011/input</msg>
+<arg>${INPUT_DIR}</arg>
+<arg>/app/tests/${test_dir}/input</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:01:07.432886" elapsed="0.001199"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:01:07.434845" level="INFO">${OUTPUT_DIR} = /app/tests/TST011/output</msg>
+<arg>${OUTPUT_DIR}</arg>
+<arg>/app/tests/${test_dir}/output</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:01:07.434359" elapsed="0.000551"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:01:07.436172" level="INFO">${EXP_DIR} = /app/tests/TST011/expected</msg>
+<arg>${EXP_DIR}</arg>
+<arg>/app/tests/${test_dir}/expected</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:01:07.435067" elapsed="0.001597"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-06T13:01:07.439469" level="INFO">${PEOPLEDB_DIR} = /app/tests/peopledb</msg>
+<arg>${PEOPLEDB_DIR}</arg>
+<arg>/app/tests/peopledb</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-06T13:01:07.437214" elapsed="0.002373"/>
+</kw>
+<arg>TST011</arg>
+<status status="PASS" start="2026-10-06T13:01:07.432178" elapsed="0.007525"/>
+</kw>
+<kw name="And The GitLab database file is prepared with peopledb">
+<kw name="Create Directory" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:07.445365" level="INFO" html="true">Created directory '&lt;a href="file:///app/tests/TST011/output"&gt;/app/tests/TST011/output&lt;/a&gt;'.</msg>
+<arg>${OUTPUT_DIR}</arg>
+<doc>Creates the specified directory.</doc>
+<status status="PASS" start="2026-10-06T13:01:07.440753" elapsed="0.004813"/>
+</kw>
+<kw name="Copy Directory" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:07.486236" level="INFO" html="true">Copied directory from '&lt;a href="file:///app/tests/peopledb/TST011/peopledb"&gt;/app/tests/peopledb/TST011/peopledb&lt;/a&gt;' to '&lt;a href="file:///app/tests/TST011/input/peopledb"&gt;/app/tests/TST011/input/peopledb&lt;/a&gt;'.</msg>
+<arg>${PEOPLEDB_DIR}/${test_dir}/peopledb</arg>
+<arg>${INPUT_DIR}</arg>
+<doc>Copies the source directory into the destination.</doc>
+<status status="PASS" start="2026-10-06T13:01:07.445786" elapsed="0.040653"/>
+</kw>
+<kw name="Copy File" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:07.527738" level="INFO" html="true">Copied file from '&lt;a href="file:///app/tests/TST011/input/gitlab.json"&gt;/app/tests/TST011/input/gitlab.json&lt;/a&gt;' to '&lt;a href="file:///app/tests/TST011/output/gitlab.json"&gt;/app/tests/TST011/output/gitlab.json&lt;/a&gt;'.</msg>
+<arg>${INPUT_DIR}/gitlab.json</arg>
+<arg>${OUTPUT_DIR}/gitlab.json</arg>
+<doc>Copies the source file into the destination.</doc>
+<status status="PASS" start="2026-10-06T13:01:07.486650" elapsed="0.041446"/>
+</kw>
+<arg>TST011</arg>
+<status status="PASS" start="2026-10-06T13:01:07.440186" elapsed="0.088041"/>
+</kw>
+<kw name="When GitLab group sync is executed">
+<kw name="Execute GitLab Group Synchronization">
+<kw name="Run Process" owner="Process">
+<msg time="2026-10-06T13:01:07.530796" level="INFO">Starting process:
+coverage run --parallel-mode -m repo_acl.main gitlab-groups --gitlab-url U --access-token X</msg>
+<msg time="2026-10-06T13:01:07.531957" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-10-06T13:01:08.008495" level="INFO">Process completed.</msg>
+<arg>coverage</arg>
+<arg>run</arg>
+<arg>--parallel-mode</arg>
+<arg>-m</arg>
+<arg>repo_acl.main</arg>
+<arg>gitlab-groups</arg>
+<arg>--gitlab-url</arg>
+<arg>U</arg>
+<arg>--access-token</arg>
+<arg>X</arg>
+<arg>@{dry_run}</arg>
+<arg>env:REPO_ACL_GROUPS_DIR=${INPUT_DIR}/groups</arg>
+<arg>env:FAKE_GITLAB_DB_PATH=${OUTPUT_DIR}/gitlab.json</arg>
+<arg>env:PEOPLEDB_DIR=${INPUT_DIR}/peopledb</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-10-06T13:01:07.529679" elapsed="0.478974"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:01:07.529199" elapsed="0.479619"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:01:07.528638" elapsed="0.480238"/>
+</kw>
+<kw name="Then The GitLab output should match the expected result">
+<kw name="Check Files Equal">
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:08.011122" level="INFO" html="true">Getting file '&lt;a href="file:///app/tests/TST011/output/gitlab.json"&gt;/app/tests/TST011/output/gitlab.json&lt;/a&gt;'.</msg>
+<msg time="2026-10-06T13:01:08.014560" level="INFO">${c1} = {
+    "users": [
+        {
+            "id": 1,
+            "name": "arunkumar.m",
+            "state": "active"
+        },
+        {
+            "id": 2,
+            "name": "pooja.k",
+            "s...</msg>
+<var>${c1}</var>
+<arg>${file1}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-10-06T13:01:08.010791" elapsed="0.003827"/>
+</kw>
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-10-06T13:01:08.015047" level="INFO" html="true">Getting file '&lt;a href="file:///app/tests/TST011/expected/gitlab.json"&gt;/app/tests/TST011/expected/gitlab.json&lt;/a&gt;'.</msg>
+<msg time="2026-10-06T13:01:08.023832" level="INFO">${c2} = {
+    "users": [
+        {
+            "id": 1,
+            "name": "arunkumar.m",
+            "state": "active"
+        },
+        {
+            "id": 2,
+            "name": "pooja.k",
+            "s...</msg>
+<var>${c2}</var>
+<arg>${file2}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-10-06T13:01:08.014827" elapsed="0.009158"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${c1}</arg>
+<arg>${c2}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-10-06T13:01:08.024297" elapsed="0.000490"/>
+</kw>
+<arg>${OUTPUT_DIR}/gitlab.json</arg>
+<arg>${EXP_DIR}/gitlab.json</arg>
+<status status="PASS" start="2026-10-06T13:01:08.010033" elapsed="0.014847"/>
+</kw>
+<status status="PASS" start="2026-10-06T13:01:08.009318" elapsed="0.015626"/>
+</kw>
+<doc>REQ011</doc>
+<status status="PASS" start="2026-10-06T13:01:07.430307" elapsed="0.594858"/>
+</test>
+<status status="PASS" start="2026-10-06T13:01:00.864092" elapsed="7.161686"/>
+</suite>
+<status status="PASS" start="2026-10-06T13:00:57.234508" elapsed="10.792353"/>
+</suite>
+<statistics>
+<total>
+<stat pass="15" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Tests" id="s1" pass="15" fail="0" skip="0">Tests</stat>
+<stat name="Test-Acl-Gitlab" id="s1-s1" pass="6" fail="0" skip="0">Tests.Test-Acl-Gitlab</stat>
+<stat name="Test-Gitlab" id="s1-s2" pass="9" fail="0" skip="0">Tests.Test-Gitlab</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

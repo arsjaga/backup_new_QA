@@ -1,0 +1,104 @@
+references:
+  gitlab_group: |
+    In GitLab, use groups to manage one or more related projects at
+    the same time. (https://docs.gitlab.com/user/group/)
+  git_group: |
+    The CSV files that contains group of users list is referred as git-group.
+    eg: world.csv, automotive-team.csv
+  shared_with_groups: |
+    In GitLab, List of groups the project is shared with.
+    (https://docs.gitlab.com/api/projects/#list-all-invited-groups-in-a-project)
+  ACL: |
+    ACL stands for Access Control List
+  acl_file: |
+    The file in which contains CSV format with the following fields:
+
+    Format : group, access_level, project_path, type
+    Example: @world, developer, org/group/project, project
+
+    - group: The name of the GitLab group to be shared, use @ to specify the group name.
+    - access_level: The access level for the group (e.g., guest, reporter, developer, maintainer, owner).
+    - project: The name of the GitLab project with which the group should be shared.
+    - type: The type of sharing (eg, project, group)
+
+requirements:
+
+  - id: REQ001
+    name: Groups in `acl_file` not shared with GitLab project
+    category: acl
+    rationale: |
+      Ensure that project access is managed through the specified `gitlab_group` rather than
+      individual members.
+    description: |
+      For each project in the `acl_file` with a specified `gitlab_group`, the tool should
+      collect the project's existing `shared_with_groups`. When the specified `gitlab_group`
+      is not present in `shared_with_groups`, the tool should add the `gitlab_group` to
+      that project.
+    status: draft
+
+  - id: REQ002
+    name: Groups specified in the `acl_file` with an access level of no-access
+    category: acl
+    rationale: |
+      Ensures that the group does not retain access through `acl_file`.
+    description: |
+      For each project with a specified `gitlab_group` in the `acl_file` and an access level
+      of no-access, the tool should collect the project's existing `shared_with_groups`. When
+      the specified `gitlab_group` is present in `shared_with_groups`, the tool should remove
+      the `gitlab_group` from that project.
+    status: draft
+
+  - id: REQ003
+    name: Invalid data in `acl_file`
+    category: acl
+    rationale: |
+      Ensure that a valid group, access level, or project are required to perform `acl_file`.
+    description: |
+      Specified `gitlab_group`, access level, or project is invalid in `acl_file`, the tool should
+      skip the corresponding `acl_file` entry and continue processing the remaining `acl_file` entries
+      then exit with an error and list all invalid definitions after processing is complete.
+    status: draft
+
+  - id: REQ004
+    name: The `acl_file` not available
+    category: acl
+    rationale: |
+      Data is required to perform `acl_file`.
+    description: |
+      If the `acl_file` is not available in Git, the tool should exits with an error and
+      does not perform the `acl_file` entries.
+    status: draft
+      
+  - id: REQ005
+    name: Groups already in `shared_with_groups`
+    category: acl
+    rationale: |
+      Ensure that duplicate groups in `acl_file` entries are not created for the same project.
+    description: |
+      If the `gitlab_group` is already shared with the specified project, the tool should
+      skip the `acl_file` entry and continue processing the remaining `acl_file` entries.
+    status: draft
+
+  - id: REQ006
+    name: Duplicate group users in project
+    category: acl
+    rationale: |
+      Ensure that duplicate users across shared groups are identified and reported
+      to avoid duplicate group membership in the same project.
+    description: |
+      If a user is present in both the existing `shared_with_groups` and the new
+      `shared_with_groups` for the same project, the tool should display a warning
+      message indicating that the user already has access to the project through
+      an existing `gitlab_group`.
+    status: draft
+
+  - id: REQ007
+    name: Dry run execution in ACL
+    category: acl
+    rationale: |
+      Allow users to review the proposed ACL changes before applying them.
+    description: |
+      When the tool is executed in dry run mode, it should simulate the
+      ACL synchronization process without making any actual changes to Gitlab.
+      This allows users to review the proposed changes before they are applied.
+    status: draft

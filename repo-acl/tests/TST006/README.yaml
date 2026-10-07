@@ -1,0 +1,8 @@
+name: Dry run execution in Expected Gitlab
+description: |
+    The GitLab group is obtained from the Expected GitLab database, The Git
+    group is obtained from the Input GitLab database, When the tool is
+    executed in dry run mode using the fake-gitlab package, it shall
+    simulate the synchronization process without making any changes to
+    the Output GitLab database. The Output GitLab database shall remain
+    unchanged and match the Expected Gitlab.

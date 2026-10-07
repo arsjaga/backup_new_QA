@@ -1,0 +1,39 @@
+{
+    "users": [
+        {
+            "email_id": "pooja.k@gowtham.work.gd"
+        },
+        {
+            "email_id": "nandhini.s@gowtham.work.gd"
+        },
+        {
+            "email_id": "arunkumar.k@gowtham.work.gd"
+        },
+        {
+            "email_id": "olduser@gowtham.work.gd"
+        }
+    ],
+    "channels": [
+        {
+            "channel_id": "101",
+            "name": "world",
+            "members": [
+                {
+                    "email_id": "pooja.k@gowtham.work.gd"
+                },
+                {
+                    "email_id": "olduser@gowtham.work.gd"
+                }
+            ]
+        },
+        {
+            "channel_id": "102",
+            "name": "automotive",
+            "members": [
+                {
+                    "email_id": "nandhini.s@gowtham.work.gd"
+                }
+            ]
+        }
+    ]
+}

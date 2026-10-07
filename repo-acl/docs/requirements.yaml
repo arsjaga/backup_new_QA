@@ -1,0 +1,150 @@
+- id: REQ001
+  name: User synchronization between Git and Gitlab groups
+  category: gitlab
+  rationale: |
+    Primary function of the tool.
+  description: |
+    Compare the users in the Git and Gitlab groups. If a user present in the Git
+    group but not present in the Gitlab group, the tool should add the user to
+    the Gitlab group. 
+    
+    If a user not present in the Git group but user present in the Gitlab group,
+    the tool should remove the user from the Gitlab group. 
+  status: draft
+
+- id: REQ002
+  name: Impact on Assigned Issues and Merge Requests
+  rationale: |
+    Keep existing assignments that is required for audits and history.
+  description: |
+    When removing a user, user assignment to issues and merge requests within
+    the group must be maintained.
+
+- id: REQ009
+  name: Impact on subgroups and projects
+  rationale: |
+    For group membership, hierarchical sub-groups will not be used. If it is
+    used we would like to manage each sub-group independently.
+  description: |
+    When removing a user from a group and direct assignment to sub-groups or
+    sub-projects should not be impacted.
+
+- id: REQ003
+  name: Handling Gitlab blocked but Active in People DB
+  category: gitlab
+  rationale: |
+    When Gitlab user database and peopledb database are out-of-sync no action to
+    be taken until the Gitlab users and peopledb are synced.
+  description: |
+    User is blocked in Gitlab and is still valid in peopledb.
+    
+    User is present in the Git group and not present in the Gitlab group: The
+    tool should not add the user to the Gitlab group. Skip the user and continue
+    processing the remaining users.
+
+    User is not present in the Git group but present in the Gitlab group: The
+    tool should not remove the user from the Gitlab group. Skip the user and
+    continue processing the remaining users.
+
+    No error is to be raised by the tool.
+  status: draft
+
+- id: REQ003
+  name: Handling Gitlab blocked and Inactive in People DB
+  category: gitlab
+  rationale: |
+    Any inactive user in People DB should not be part of any group. Groups
+    should be unassigned first and then the user should have been removed.
+  
+  description: |
+    User is blocked in Gitlab and is Inactive in peopledb.
+
+    No special treatment for this case is required, handle user as a normal
+    Inactive user. This should result in an error.
+  status: draft
+  related: REQ007
+
+- id: REQ004
+  name: Group not present in Gitlab
+  category: gitlab
+  rationale: |
+    Group definition needs more information to be provided during
+    creation, which we do not store as part of the current group
+    definition within git.
+  description: |
+    If a group is present in Git but not available in Gitlab, the tool should not create the
+    group in Gitlab. The tool should synchronize the remaining groups, then exit with an error
+    and list all groups that were not found in Gitlab.
+  status: draft
+
+- id: REQ005
+  name: Gitlab parent group not available
+  category: gitlab
+  rationale: |
+    Parent group definition needs more information to be provided
+    during creation, which we do not store as part of the parent
+    group definition within Git.
+  description: |
+    If the parent group is not available in Gitlab, the tool should not create
+    the parent group in Gitlab. The tool should synchronize all remaining groups
+    with existing parent groups in Gitlab.
+  status: draft
+
+- id: REQ006
+  name: Dry run execution in Gitlab
+  category: gitlab
+  rationale: |
+    Allow users to review the proposed changes before applying them.
+  description: |
+    When the tool is executed in dry run mode, it should simulate the
+    synchronization process without making any actual changes to Gitlab.
+    This allows users to review the proposed changes before they are applied.
+  status: draft
+
+- id: REQ007
+  name: Malformed user definition file in the Git group
+  category: gitlab
+  rationale: |
+    Ensure that non-existent usernames, typographical errors, or invalid user
+    definitions do not interrupt the synchronization process for the remaining
+    valid users in the Git group.
+  description: |
+    If a Git group user is not an active user in People DB, the tool should skip
+    the invalid user, continue synchronizing the remaining valid users, list all
+    invalid users and exit with an error after the synchronization is complete.
+  status: draft
+
+- id: REQ008
+  name: Git group location is not available
+  category: gitlab
+  rationale: |
+    Data in git is required for synchronization.
+  description: |
+    Synchronize groups with Gitlab only when the required group definitions is
+    available in Git. If the group location is not available in Git, the tool
+    exits with an error and does not perform the synchronization.
+  status: draft
+
+- id: REQ010
+  name: Gitlab server accessibility
+  category: gitlab
+  rationale: |
+    Gitlab server should be reachable for synchronization.
+  description: |
+    If the Gitlab server is accessible, the tool should connect to the Gitlab
+    server and proceed with synchronization. Otherwise, the tool should report
+    an error and terminate without performing any synchronization operations.
+  status: draft
+
+- id: REQ011
+  name: User not found in GitLab but Active in peopledb
+  category: gitlab
+  rationale: |
+    Any inactive user in GitLab should not be part of any group. For users who
+    have not yet signed in to GitLab, no action should be taken until they
+    sign in.
+  description: |
+    If a user is active in the People DB but user has not signed in to GitLab,
+    the tool should skip the user and continue synchronizing the remaining users.
+    After the synchronization is complete, the tool should list all users who
+    have not signed in to GitLab and exit with an error.

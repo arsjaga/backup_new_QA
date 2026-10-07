@@ -1,0 +1,9 @@
+name: Input group present, but Group not present in Expected Gitlab group
+description: |
+    The GitLab group is obtained from the Expected GitLab database, the Git
+    group is obtained from the Input GitLab database. When the tool is executed
+    using the fake-gitlab package, then the Output GitLab database shall be
+    generated and the Output GitLab database shall be synchronized with the
+    Expected GitLab database. If a group is in Input groups, but not available
+    in Expected Gitlab group, the group should not be created, the tool should
+    exit with an error, after syncing the remaining groups.

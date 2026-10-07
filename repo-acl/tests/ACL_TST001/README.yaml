@@ -1,0 +1,9 @@
+name: User not present in Expected Gitlab project
+description: |
+    The GitLab project is obtained from the Expected GitLab database, The Git
+    project is obtained from the Input GitLab database, When the tool is
+    executed using the fake-gitlab package, The Output GitLab database shall
+    be generated and the Output GitLab database shall be synchronized with
+    the Expected GitLab database. if a user present in the acl definition file
+    but not in the Expected GitLab project, the user shall be added to the
+    Expected GitLab project with the configured access level.

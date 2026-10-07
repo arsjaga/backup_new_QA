@@ -1,0 +1,64 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "name": "arunkumar.m",
+            "state": "active"
+        },
+        {
+            "id": 2,
+            "name": "pooja.k",
+            "state": "active"
+        },
+        {
+            "id": 3,
+            "name": "nandhini.s",
+            "state": "active"
+        }
+    ],
+    "groups": [
+        {
+            "id": 12,
+            "path": "org/groups/world",
+            "members": [
+                {
+                    "user_id": 1,
+                    "access_level": 30
+                },
+                {
+                    "user_id": 2,
+                    "access_level": 40
+                }
+            ]
+        }
+    ],
+    "projects": [
+        {
+            "id": 101,
+            "project_path": "org/repo-acl",
+            "members": [
+                {
+                    "user_id": 1,
+                    "access_level": 30
+                }
+            ],
+            "shared_with_groups": []
+        },
+        {
+            "id": 102,
+            "project_path": "org/zs",
+            "members": [
+                {
+                    "user_id": 1,
+                    "access_level": 30
+                }
+            ],
+            "shared_with_groups": [
+                {
+                    "group_id": 12,
+                    "group_access_level": 30
+                }
+            ]
+        }
+    ]
+}

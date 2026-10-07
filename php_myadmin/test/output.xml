@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.2.2 (Python 3.12.7 on win32)" generated="2026-07-10T10:44:16.353814" rpa="false" schemaversion="5">
+<suite id="s1" name="Database Robot" source="C:\Users\user\Desktop\php_myadmin\database_robot.robot">
+<kw name="Connect Database and Setup QA Meta Data" type="SETUP">
+<kw name="Connect Database" owner="database.Database">
+<arg>product_db</arg>
+<status status="PASS" start="2026-07-10T10:44:17.081859" elapsed="2.066585"/>
+</kw>
+<kw name="Setup QA Meta Data">
+<kw name="Get Value From User" owner="Dialogs">
+<msg time="2026-07-10T10:44:27.467069" level="INFO">${serial_number} = REQ0011</msg>
+<var>${serial_number}</var>
+<arg>Update Product Serial Number</arg>
+<doc>Pauses execution and asks user to input a value.</doc>
+<status status="PASS" start="2026-07-10T10:44:19.148444" elapsed="8.318625"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2026-07-10T10:44:27.471880" level="INFO">${PRODUCT_SERIAL_NUMBER} = REQ0011</msg>
+<arg>${PRODUCT_SERIAL_NUMBER}</arg>
+<arg>${serial_number}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2026-07-10T10:44:27.471880" elapsed="0.000000"/>
+</kw>
+<kw name="Insert the Values in Table" owner="database.Database">
+<arg>${PRODUCT_SERIAL_NUMBER}</arg>
+<status status="PASS" start="2026-07-10T10:44:27.471880" elapsed="0.011110"/>
+</kw>
+<kw name="Get Value From User" owner="Dialogs">
+<msg time="2026-07-10T10:44:30.442177" level="INFO">${Hardware Version} = 0011</msg>
+<var>${Hardware Version}</var>
+<arg>Update Hardware Version</arg>
+<doc>Pauses execution and asks user to input a value.</doc>
+<status status="PASS" start="2026-07-10T10:44:27.482990" elapsed="2.959187"/>
+</kw>
+<kw name="Update Test Data" owner="database.Database">
+<arg>${PRODUCT_SERIAL_NUMBER}</arg>
+<arg>Hardware_Version</arg>
+<arg>${Hardware Version}</arg>
+<status status="PASS" start="2026-07-10T10:44:30.442177" elapsed="0.006903"/>
+</kw>
+<kw name="Get Value From User" owner="Dialogs">
+<msg time="2026-07-10T10:44:32.706482" level="INFO">${QA Performed By} = jaga</msg>
+<var>${QA Performed By}</var>
+<arg>Update QA Performed By</arg>
+<doc>Pauses execution and asks user to input a value.</doc>
+<status status="PASS" start="2026-07-10T10:44:30.449080" elapsed="2.257402"/>
+</kw>
+<kw name="Update Test Data" owner="database.Database">
+<arg>${PRODUCT_SERIAL_NUMBER}</arg>
+<arg>QA_Performed_By</arg>
+<arg>${QA Performed By}</arg>
+<status status="PASS" start="2026-07-10T10:44:32.706482" elapsed="0.008456"/>
+</kw>
+<kw name="Get Current Date" owner="DateTime">
+<msg time="2026-07-10T10:44:32.715448" level="INFO">${QA_Performed_On} = 10/07/2026</msg>
+<var>${QA_Performed_On}</var>
+<arg>result_format=%d/%m/%Y</arg>
+<doc>Returns current local or UTC time with an optional increment.</doc>
+<status status="PASS" start="2026-07-10T10:44:32.715448" elapsed="0.000000"/>
+</kw>
+<kw name="Update Test Data" owner="database.Database">
+<arg>${PRODUCT_SERIAL_NUMBER}</arg>
+<arg>QA_Performed_On</arg>
+<arg>${QA_Performed_On}</arg>
+<status status="PASS" start="2026-07-10T10:44:32.715448" elapsed="0.014199"/>
+</kw>
+<status status="PASS" start="2026-07-10T10:44:19.148444" elapsed="13.582171"/>
+</kw>
+<kw name="Get Device Port" owner="common">
+<kw name="Pause Execution" owner="Dialogs">
+<arg>Disconnect the serial interface from host pc</arg>
+<doc>Pauses execution until user clicks ``Ok`` button.</doc>
+<status status="PASS" start="2026-07-10T10:44:32.730615" elapsed="3.404837"/>
+</kw>
+<kw name="Wait for USB Device" owner="common">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-07-10T10:44:38.146975" level="INFO">Slept 2 seconds.</msg>
+<arg>${time}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-07-10T10:44:36.135452" elapsed="2.011523"/>
+</kw>
+<arg>2s</arg>
+<status status="PASS" start="2026-07-10T10:44:36.135452" elapsed="2.011523"/>
+</kw>
+<kw name="Get Ports" owner="Serial">
+<msg time="2026-07-10T10:44:38.157543" level="INFO">${Disconnected} = []</msg>
+<var>${Disconnected}</var>
+<status status="PASS" start="2026-07-10T10:44:38.146975" elapsed="0.010568"/>
+</kw>
+<kw name="Pause Execution" owner="Dialogs">
+<arg>Connect the serial interface to host pc</arg>
+<doc>Pauses execution until user clicks ``Ok`` button.</doc>
+<status status="PASS" start="2026-07-10T10:44:38.157543" elapsed="5.977938"/>
+</kw>
+<kw name="Wait for USB Device" owner="common">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-07-10T10:44:46.152044" level="INFO">Slept 2 seconds.</msg>
+<arg>${time}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-07-10T10:44:44.151670" elapsed="2.000374"/>
+</kw>
+<arg>2s</arg>
+<status status="PASS" start="2026-07-10T10:44:44.149196" elapsed="2.002848"/>
+</kw>
+<kw name="Get Ports" owner="Serial">
+<msg time="2026-07-10T10:44:46.180019" level="INFO">${Connected} = ['COM36']</msg>
+<var>${Connected}</var>
+<status status="PASS" start="2026-07-10T10:44:46.152044" elapsed="0.027975"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-07-10T10:44:46.185831" level="INFO">${Detected_Device} = ['COM36']</msg>
+<var>${Detected_Device}</var>
+<arg>list(set(${Connected}) - set(${Disconnected}))</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-07-10T10:44:46.180019" elapsed="0.005812"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2026-07-10T10:44:46.185831" level="INFO">${DEVICE_PORT} = COM36</msg>
+<arg>${DEVICE_PORT}</arg>
+<arg>${Detected_Device[0]}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2026-07-10T10:44:46.185831" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2026-07-10T10:44:32.730615" elapsed="13.455216"/>
+</kw>
+<kw name="Open Serial Connection" owner="common">
+<kw name="Open Serial Port" owner="Serial">
+<arg>${device_port}</arg>
+<arg>${baudrate}</arg>
+<doc>Opens a serial port connection with the specified parameters.</doc>
+<status status="PASS" start="2026-07-10T10:44:46.185831" elapsed="3.185039"/>
+</kw>
+<kw name="Flush Received Data" owner="Serial">
+<doc>Flushes any remaining data from the receive buffer of the serial port.</doc>
+<status status="PASS" start="2026-07-10T10:44:49.370870" elapsed="1.004548"/>
+</kw>
+<arg>${DEVICE_PORT}</arg>
+<arg>115200</arg>
+<status status="PASS" start="2026-07-10T10:44:46.185831" elapsed="4.189587"/>
+</kw>
+<status status="PASS" start="2026-07-10T10:44:17.081244" elapsed="33.294174"/>
+</kw>
+<test id="s1-t1" name="Test to check 1.4.0 Version" line="58">
+<kw name="Send serial command for Version">
+<kw name="Write" owner="Serial">
+<msg time="2026-07-10T10:44:50.390010" level="FAIL">AttributeError: 'NoneType' object has no attribute 'write'</msg>
+<arg>V\r</arg>
+<doc>Writes a command to the opened serial port.</doc>
+<status status="FAIL" start="2026-07-10T10:44:50.375418" elapsed="0.059678">AttributeError: 'NoneType' object has no attribute 'write'</status>
+</kw>
+<status status="FAIL" start="2026-07-10T10:44:50.375418" elapsed="0.059678">AttributeError: 'NoneType' object has no attribute 'write'</status>
+</kw>
+<kw name="Verify the Device version matches the 1.4.0 Version">
+<status status="NOT RUN" start="2026-07-10T10:44:50.437598" elapsed="0.000000"/>
+</kw>
+<status status="FAIL" start="2026-07-10T10:44:50.375418" elapsed="0.062822">AttributeError: 'NoneType' object has no attribute 'write'</status>
+</test>
+<test id="s1-t2" name="Test to check 0xFB89EB37 Checksum" line="62">
+<kw name="Send serial command for CRC">
+<kw name="Write" owner="Serial">
+<msg time="2026-07-10T10:44:50.438240" level="FAIL">AttributeError: 'NoneType' object has no attribute 'write'</msg>
+<arg>h\r</arg>
+<doc>Writes a command to the opened serial port.</doc>
+<status status="FAIL" start="2026-07-10T10:44:50.438240" elapsed="0.000000">AttributeError: 'NoneType' object has no attribute 'write'</status>
+</kw>
+<status status="FAIL" start="2026-07-10T10:44:50.438240" elapsed="0.000000">AttributeError: 'NoneType' object has no attribute 'write'</status>
+</kw>
+<kw name="Verify the Device CRC Value matches CRC:0xFB89EB37 Value">
+<status status="NOT RUN" start="2026-07-10T10:44:50.443046" elapsed="0.000000"/>
+</kw>
+<status status="FAIL" start="2026-07-10T10:44:50.438240" elapsed="0.004806">AttributeError: 'NoneType' object has no attribute 'write'</status>
+</test>
+<kw name="QA Suite Teardown" type="TEARDOWN">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-07-10T10:44:50.443046" level="INFO">${status} = None</msg>
+<msg time="2026-07-10T10:44:50.443046" level="FAIL">Variable '${TEST_STATUS}' not found. Did you mean:
+    ${PREV_TEST_STATUS}</msg>
+<var>${status}</var>
+<arg>${TEST_STATUS}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="FAIL" start="2026-07-10T10:44:50.443046" elapsed="0.003382">Variable '${TEST_STATUS}' not found. Did you mean:
+    ${PREV_TEST_STATUS}</status>
+</kw>
+<kw name="Update Test Data" owner="database.Database">
+<arg>${PRODUCT_SERIAL_NUMBER}</arg>
+<arg>QA_Passed</arg>
+<arg>${status}</arg>
+<status status="PASS" start="2026-07-10T10:44:50.446428" elapsed="0.010014"/>
+</kw>
+<kw name="Close Database" owner="database.Database">
+<msg time="2026-07-10T10:44:50.456442" level="INFO">Database connection closed.</msg>
+<status status="PASS" start="2026-07-10T10:44:50.456442" elapsed="0.000000"/>
+</kw>
+<kw name="Close Serial Connection" owner="common">
+<kw name="Close Serial Port" owner="Serial">
+<doc>Closes the opened serial port connection.</doc>
+<status status="PASS" start="2026-07-10T10:44:50.457754" elapsed="0.122048"/>
+</kw>
+<status status="PASS" start="2026-07-10T10:44:50.456442" elapsed="0.123360"/>
+</kw>
+<status status="FAIL" start="2026-07-10T10:44:50.443046" elapsed="0.137492">Variable '${TEST_STATUS}' not found. Did you mean:
+    ${PREV_TEST_STATUS}</status>
+</kw>
+<status status="FAIL" start="2026-07-10T10:44:16.357798" elapsed="34.222740">Suite teardown failed:
+Variable '${TEST_STATUS}' not found. Did you mean:
+    ${PREV_TEST_STATUS}</status>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="2" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Database Robot" id="s1" pass="0" fail="2" skip="0">Database Robot</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

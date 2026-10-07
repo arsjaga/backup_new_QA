@@ -1,0 +1,16 @@
+README.md
+pyproject.toml
+repo_acl/main.py
+repo_acl/readgroup.py
+repo_acl.egg-info/PKG-INFO
+repo_acl.egg-info/SOURCES.txt
+repo_acl.egg-info/dependency_links.txt
+repo_acl.egg-info/entry_points.txt
+repo_acl.egg-info/requires.txt
+repo_acl.egg-info/top_level.txt
+repo_acl/platforms/gitlab_groups.py
+repo_acl/platforms/zoho_cliq.py
+repo_acl/platforms/zoho_mail.py
+tests/test_gitlab_groups.py
+tests/test_zoho_cliq.py
+tests/test_zoho_mail.py

@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "repo-acl"
+version = "0.1.0"
+description = "A tool for managing repo access control lists"
+readme = "README.md"
+requires-python = ">=3.8"
+authors = [
+    { name = "IT Support", email = "it-support@zilogic.com" }
+    ]
+dependencies = [
+    "requests",
+    "python-gitlab"
+]
+
+[project.scripts]
+repo-acl = "repo_acl.main:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["repo_acl*"]
+

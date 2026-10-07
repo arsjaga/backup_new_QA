@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.2.2 (Python 3.12.7 on win32)" generated="2026-07-07T16:08:17.532139" rpa="false" schemaversion="5">
+<suite id="s1" name="Database Robot" source="C:\Users\user\Desktop\php_myadmin\database_robot.robot">
+<kw name="Connect Database and Setup QA Meta Data" type="SETUP">
+<kw name="Connect Database" owner="database.Database">
+<arg>product_db</arg>
+<status status="PASS" start="2026-07-07T16:08:17.895959" elapsed="2.069714"/>
+</kw>
+<kw name="Setup QA Meta Data">
+<kw name="Get Value From User" owner="Dialogs">
+<msg time="2026-07-07T16:08:24.020819" level="INFO">${serial_number} = REQ002</msg>
+<var>${serial_number}</var>
+<arg>Update Product Serial Number</arg>
+<doc>Pauses execution and asks user to input a value.</doc>
+<status status="PASS" start="2026-07-07T16:08:19.965673" elapsed="4.055146"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2026-07-07T16:08:24.020819" level="INFO">${PRODUCT_SERIAL_NUMBER} = REQ002</msg>
+<arg>${PRODUCT_SERIAL_NUMBER}</arg>
+<arg>${serial_number}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2026-07-07T16:08:24.020819" elapsed="0.000000"/>
+</kw>
+<kw name="Insert the Values in Table" owner="database.Database">
+<arg>${PRODUCT_SERIAL_NUMBER}</arg>
+<status status="PASS" start="2026-07-07T16:08:24.022131" elapsed="0.003145"/>
+</kw>
+<kw name="Get Value From User" owner="Dialogs">
+<msg time="2026-07-07T16:08:27.036411" level="INFO">${Hardware Version} = TST002</msg>
+<var>${Hardware Version}</var>
+<arg>Update Hardware Version</arg>
+<doc>Pauses execution and asks user to input a value.</doc>
+<status status="PASS" start="2026-07-07T16:08:24.025276" elapsed="3.011135"/>
+</kw>
+<kw name="Update Test Data" owner="database.Database">
+<arg>${PRODUCT_SERIAL_NUMBER}</arg>
+<arg>Hardware_Version</arg>
+<arg>${Hardware Version}</arg>
+<status status="PASS" start="2026-07-07T16:08:27.036411" elapsed="0.016849"/>
+</kw>
+<kw name="Get Value From User" owner="Dialogs">
+<msg time="2026-07-07T16:08:29.876448" level="INFO">${QA Performed By} = JAGA</msg>
+<var>${QA Performed By}</var>
+<arg>Update QA Performed By</arg>
+<doc>Pauses execution and asks user to input a value.</doc>
+<status status="PASS" start="2026-07-07T16:08:27.053864" elapsed="2.822584"/>
+</kw>
+<kw name="Update Test Data" owner="database.Database">
+<arg>${PRODUCT_SERIAL_NUMBER}</arg>
+<arg>QA_Performed_By</arg>
+<arg>${QA Performed By}</arg>
+<status status="PASS" start="2026-07-07T16:08:29.877127" elapsed="0.004583"/>
+</kw>
+<kw name="Get Current Date" owner="DateTime">
+<msg time="2026-07-07T16:08:29.882249" level="INFO">${QA_Performed_On} = 07/07/2026</msg>
+<var>${QA_Performed_On}</var>
+<arg>result_format=%d/%m/%Y</arg>
+<doc>Returns current local or UTC time with an optional increment.</doc>
+<status status="PASS" start="2026-07-07T16:08:29.882249" elapsed="0.000000"/>
+</kw>
+<kw name="Update Test Data" owner="database.Database">
+<arg>${PRODUCT_SERIAL_NUMBER}</arg>
+<arg>QA_Performed_On</arg>
+<arg>${QA_Performed_On}</arg>
+<status status="PASS" start="2026-07-07T16:08:29.882249" elapsed="0.006969"/>
+</kw>
+<status status="PASS" start="2026-07-07T16:08:19.965673" elapsed="9.924913"/>
+</kw>
+<kw name="Get Device Port" owner="common">
+<kw name="Pause Execution" owner="Dialogs">
+<arg>Disconnect the serial interface from host pc</arg>
+<doc>Pauses execution until user clicks ``Ok`` button.</doc>
+<status status="PASS" start="2026-07-07T16:08:29.890586" elapsed="1.125621"/>
+</kw>
+<kw name="Wait for USB Device" owner="common">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-07-07T16:08:33.017749" level="INFO">Slept 2 seconds.</msg>
+<arg>${time}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-07-07T16:08:31.016207" elapsed="2.001542"/>
+</kw>
+<arg>2s</arg>
+<status status="PASS" start="2026-07-07T16:08:31.016207" elapsed="2.001542"/>
+</kw>
+<kw name="Get Ports" owner="Serial">
+<msg time="2026-07-07T16:08:33.029657" level="INFO">${Disconnected} = []</msg>
+<var>${Disconnected}</var>
+<status status="PASS" start="2026-07-07T16:08:33.017749" elapsed="0.011908"/>
+</kw>
+<kw name="Pause Execution" owner="Dialogs">
+<arg>Connect the serial interface to host pc</arg>
+<doc>Pauses execution until user clicks ``Ok`` button.</doc>
+<status status="PASS" start="2026-07-07T16:08:33.029657" elapsed="1.042698"/>
+</kw>
+<kw name="Wait for USB Device" owner="common">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-07-07T16:08:36.073288" level="INFO">Slept 2 seconds.</msg>
+<arg>${time}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-07-07T16:08:34.072355" elapsed="2.000933"/>
+</kw>
+<arg>2s</arg>
+<status status="PASS" start="2026-07-07T16:08:34.072355" elapsed="2.000933"/>
+</kw>
+<kw name="Get Ports" owner="Serial">
+<msg time="2026-07-07T16:08:36.082275" level="INFO">${Connected} = []</msg>
+<var>${Connected}</var>
+<status status="PASS" start="2026-07-07T16:08:36.073288" elapsed="0.008987"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-07-07T16:08:36.082275" level="INFO">${Detected_Device} = []</msg>
+<var>${Detected_Device}</var>
+<arg>list(set(${Connected}) - set(${Disconnected}))</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-07-07T16:08:36.082275" elapsed="0.000000"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2026-07-07T16:08:36.082275" level="FAIL">Resolving variable '${Detected_Device[0]}' failed: IndexError: list index out of range</msg>
+<arg>${DEVICE_PORT}</arg>
+<arg>${Detected_Device[0]}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="FAIL" start="2026-07-07T16:08:36.082275" elapsed="0.000000">Resolving variable '${Detected_Device[0]}' failed: IndexError: list index out of range</status>
+</kw>
+<status status="FAIL" start="2026-07-07T16:08:29.890586" elapsed="6.191689">Resolving variable '${Detected_Device[0]}' failed: IndexError: list index out of range</status>
+</kw>
+<kw name="Open Serial Connection" owner="common">
+<arg>${DEVICE_PORT}</arg>
+<arg>115200</arg>
+<status status="NOT RUN" start="2026-07-07T16:08:36.082275" elapsed="0.000000"/>
+</kw>
+<status status="FAIL" start="2026-07-07T16:08:17.895959" elapsed="18.186316">Resolving variable '${Detected_Device[0]}' failed: IndexError: list index out of range</status>
+</kw>
+<test id="s1-t1" name="Test to check 1.4.0 Version" line="58">
+<status status="FAIL" start="2026-07-07T16:08:36.082275" elapsed="0.000000">Parent suite setup failed:
+Resolving variable '${Detected_Device[0]}' failed: IndexError: list index out of range</status>
+</test>
+<test id="s1-t2" name="Test to check 0xFB89EB37 Checksum" line="62">
+<status status="FAIL" start="2026-07-07T16:08:36.082275" elapsed="0.000000">Parent suite setup failed:
+Resolving variable '${Detected_Device[0]}' failed: IndexError: list index out of range</status>
+</test>
+<kw name="QA Suite Teardown" type="TEARDOWN">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-07-07T16:08:36.082275" level="INFO">${status} = None</msg>
+<msg time="2026-07-07T16:08:36.082275" level="FAIL">Variable '${TEST_STATUS}' not found. Did you mean:
+    ${PREV_TEST_STATUS}</msg>
+<var>${status}</var>
+<arg>${TEST_STATUS}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="FAIL" start="2026-07-07T16:08:36.082275" elapsed="0.000000">Variable '${TEST_STATUS}' not found. Did you mean:
+    ${PREV_TEST_STATUS}</status>
+</kw>
+<kw name="Update Test Data" owner="database.Database">
+<arg>${PRODUCT_SERIAL_NUMBER}</arg>
+<arg>QA_Passed</arg>
+<arg>${status}</arg>
+<status status="PASS" start="2026-07-07T16:08:36.082275" elapsed="0.015270"/>
+</kw>
+<kw name="Close Database" owner="database.Database">
+<msg time="2026-07-07T16:08:36.097545" level="INFO">Database connection closed.</msg>
+<status status="PASS" start="2026-07-07T16:08:36.097545" elapsed="0.000000"/>
+</kw>
+<kw name="Close Serial Connection" owner="common">
+<kw name="Close Serial Port" owner="Serial">
+<doc>Closes the opened serial port connection.</doc>
+<status status="PASS" start="2026-07-07T16:08:36.097545" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2026-07-07T16:08:36.097545" elapsed="0.000000"/>
+</kw>
+<status status="FAIL" start="2026-07-07T16:08:36.082275" elapsed="0.015270">Variable '${TEST_STATUS}' not found. Did you mean:
+    ${PREV_TEST_STATUS}</status>
+</kw>
+<status status="FAIL" start="2026-07-07T16:08:17.532139" elapsed="18.565406">Suite setup failed:
+Resolving variable '${Detected_Device[0]}' failed: IndexError: list index out of range
+
+Also suite teardown failed:
+Variable '${TEST_STATUS}' not found. Did you mean:
+    ${PREV_TEST_STATUS}</status>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="2" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Database Robot" id="s1" pass="0" fail="2" skip="0">Database Robot</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

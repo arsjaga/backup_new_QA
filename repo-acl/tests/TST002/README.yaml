@@ -1,0 +1,9 @@
+name: Input group present, but user not present in input Gitlab group
+description: |
+    The GitLab group is obtained from the Expected GitLab database, the Git
+    group is obtained from the Input GitLab database. When the tool is executed
+    using the fake-gitlab package, then the Output GitLab database shall be
+    generated and the Output GitLab database shall be synchronized with the
+    Expected GitLab database. If a user present in the Expected GitLab group but
+    not in the Input group, the user shall be removed from the Expected GitLab
+    group.

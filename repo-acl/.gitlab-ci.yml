@@ -1,0 +1,54 @@
+dry-run:
+   image: debian:trixie-slim
+   script:
+     - apt-get update
+     - apt-get install python3 python-is-python3 python3-pip -y
+     - pip install -r requirements.txt --break-system-packages
+     - pip install . --break-system-packages
+     - zdeb-utils -a download -k "$ENGG_PKG_REGISTRY_KEY" -r engg/packages -p peopledb -v __latest__ -f peopledb.deb
+     - apt-get install ./peopledb.deb
+     - cp -r /usr/share/peopledb/ .
+     - make dry-run
+     - export PYTHONPATH=$PWD/fake-gitlab
+     - make coverage
+    #  - make unit-test
+    #  - python3 -m pytest tests --cov=repo_acl/platforms --cov-report=term-missing --cov-report=xml:coverage.xml --junitxml=report.xml
+
+   coverage: '/TOTAL\s+\d+\s+\d+\s+(\d+%)/'
+   artifacts:
+     when: always
+     reports:
+       junit: report.xml
+       coverage_report:
+         coverage_format: cobertura
+         path: coverage.xml
+
+   rules:
+     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+
+update:
+   image: debian:bullseye-slim
+   script:
+     - apt-get update
+     - apt-get install python3 python-is-python3 python3-pip -y
+     - pip install -r requirements.txt --break-system-packages
+     - pip install . --break-system-packages
+     - zdeb-utils -a download -k "$ENGG_PKG_REGISTRY_KEY" -r engg/packages -p peopledb -v __latest__ -f peopledb.deb
+     - apt-get install ./peopledb.deb
+     - cp -r /usr/share/peopledb/ .
+     - make update
+     - export PYTHONPATH=$PWD/fake-gitlab
+     - make coverage
+    #  - make unit-test
+    #  - python3 -m pytest tests --cov=repo_acl/platforms --cov-report=term-missing --cov-report=xml:coverage.xml --junitxml=report.xml
+   coverage: '/TOTAL\s+\d+\s+\d+\s+(\d+%)/'
+   artifacts:
+     when: always
+     reports:
+       junit: report.xml
+       coverage_report:
+         coverage_format: cobertura
+         path: coverage.xml
+
+   rules:
+     - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "main"'
